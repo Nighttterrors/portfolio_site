@@ -1,0 +1,439 @@
+{% load static %}
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diego's corner</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+    <script src="{% static 'js/scripts.js' %}" defer></script>
+</head>
+
+<div>
+    <!--Navigation-->
+    <nav class="nav">
+        <div class="nav-container">
+
+            <a href="#" class="nav-logo">Portfolio</a>
+
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-greeting">Hello, I'm</p>
+            <h1 class="hero-name">Diego Gutierrez</h1>
+            <p class="hero-title">Web Developer </p>
+            <p class="hero-description">
+                Recent graduate from The Univerity of Houston and full time Web Developer at cloud ninjas,
+                passionate about building innovative solutions and bringing ideas to life through code and hard work.
+            </p>
+            <div class="social-links">
+                <a href="https://github.com/Nighttterrors" target="_blank" rel="noopener noreferrer"
+                    class="social-link">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/diego-gutiérrez-17b5b4297" target="_blank"
+                    rel="noopener noreferrer" class="social-link">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                </a>
+                <a href="mailto:diegosalvadorgutierrez@outlook.com" class="social-link">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section" style="background: var(--color-cream);">
+        <h2 class="section-title fade-in">About Me</h2>
+        <div class="section-divider fade-in"></div>
+
+        <div class="about-grid">
+            <div class="about-text fade-in-left">
+                <h3>My Story</h3>
+                <p>
+                    I graduated from the University of Houston in May 2025 with a degree in
+                    Computer Science and a minor in Math. My journey into tech started with a curiosity about how
+                    things work, which evolved into a passion for building ideas. Utilizing meticulous processes that
+                    are research-driven, my dedication to quality and effectiveness underscores my work ethic.
+                </p>
+                <p>
+                    <br> Throughout my academic career, personal projects, and professional career I have developed a
+                    strong
+                    foundation in full-stack development, Website design, and software
+                    engineering principles. I'm always eager to learn new technologies and tackle
+                    challenging problems.
+                </p>
+            </div>
+
+            <div class="about-skills fade-in-right">
+                <h3>Skills</h3>
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">Python</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="90%" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">Django</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="85%" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">GIT</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="80%" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">JavaScript</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="80%" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">Shopify Liquid</span>
+                        <span>20%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="20%" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">SQL & Databases</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="70%" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="highlights-grid">
+            <div class="highlight-card fade-in">
+                <div class="highlight-icon">
+                    <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z" />
+                    </svg>
+                </div>
+                <h4>Clean Code</h4>
+                <p>Writing maintainable and scalable code</p>
+            </div>
+            <div class="highlight-card fade-in">
+                <div class="highlight-icon">
+                    <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 17l-5-5.299 1.399-1.43 3.574 3.736 6.572-7.007 1.455 1.403-8 8.597z" />
+                    </svg>
+                </div>
+                <h4>Full Stack</h4>
+                <p>Frontend and backend development</p>
+            </div>
+            <div class="highlight-card fade-in">
+                <div class="highlight-icon">
+                    <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0l8.5 5.25v10.5l-8.5 5.25-8.5-5.25v-10.5l8.5-5.25zm3.3 15.5l1.4-1.4-4.7-4.7-4.7 4.7 1.4 1.4 3.3-3.3 3.3 3.3z" />
+                    </svg>
+                </div>
+                <h4>Fast Learner</h4>
+                <p>Quickly adapt to new technologies and environments</p>
+            </div>
+            <div class="highlight-card fade-in">
+                <div class="highlight-icon">
+                    <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 22c-5.514 0-10-4.486-10-10s4.486-10 10-10 10 4.486 10 10-4.486 10-10 10zm0-18c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zm-1 13h2v-8h-2v8zm0-10h2v-2h-2v2z"
+                            </svg>
+                </div>
+                <h4>Team Player</h4>
+                <p>Collaborative and communicative</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section" style="background: white;">
+        <h2 class="section-title fade-in">Featured Projects</h2>
+        <div class="section-divider fade-in"></div>
+
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudHxlbnwxfHx8fDE3NjgwOTYyMDh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+                    alt="Project 1" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">E-commerce Website</h3>
+                    <p class="project-description">A full-stack e-commerce application with user
+                        authentication, product management, and payment
+                        integration.</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-link"><svg
+                                width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                            Github
+                        </a>
+                        <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z" />
+                            </svg>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <img src="https://images.unsplash.com/photo-1604781109199-ced99b89b0f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjB3b3Jrc3BhY2UlMjBkZXNrfGVufDF8fHx8MTc2ODEwMzAzN3ww&ixlib=rb-4.1.0&q=80&w=1080"
+                    alt="Project 2" class="project-image" />
+                <div class="project-content">
+                    <h3 class="project-title">
+                        Task Management App
+                    </h3>
+                    <p class="project-description">
+                        A collaborative task management tool with
+                        real-time updates, drag-and-drop functionality,
+                        and team features.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">React</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Tailwind</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-link">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                            Github
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+</div>
+</section>
+
+
+<!-- Experience Section -->
+<section id="experience" class="section" style="background:#F3F2ED;">
+
+    <h2 class="section-title">
+        Experience & Education
+    </h2>
+    <div class="section-divider"></div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <p class="timeline-date">2022 - May 2025</p>
+                <h3 class="timeline-title">Bachelor of Science in Computer Science</h3>
+                <p class="timeline-org">University of Houston</p>
+                <p class="timeline-description">
+                    Focused on software engineering, data structures, statistical learning, and web development.
+                </p>
+                <ul class="timeline-highlights">
+                    <li>GPA: 3.2/4.0</li>
+                    <li>CSCoogs Member</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <p class="timeline-date">2025 - Present</p>
+                <h3 class="timeline-title">Web Developer</h3>
+                <p class="timeline-org">Cloud Ninjas</p>
+                <p class="timeline-description">
+                    Maintain and enhance the company website by developing scalable, high-quality features and ensuring
+                    optimal performance and reliability. Create SEO-optimized content to improve search visibility and
+                    organic growth. Write clean, maintainable code with long-term sustainability in mind, enabling
+                    seamless collaboration and future development. Proactively identify and take ownership of projects
+                    that lose momentum, driving them forward to successful completion while aligning technical execution
+                    with business goals
+                </p>
+                <ul class="timeline-highlights">
+                    <li>**Add Stuff Here**</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--Contact Section-->
+<!--after the contact section there will be the footer and then the portfolio 
+is done
+-->
+<section id="contact" class="section" style="background: white;">
+
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="section-divider"></div>
+
+    <div class="contact-grid">
+        <div class="contact-info">
+            <h3>Contact Information</h3>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z" />
+                    </svg>
+                </div>
+                <div class="contact-details">
+                    <p class="contact-label">Email</p>
+                    <p class="contact-value">
+                        <a href="mailto:diegosalvadorgutierrez@outlook.com">
+                            diegosalvadorgutierrez@outlook.com
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <svg width="20" heigt="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M20 22.621l-3.521-6.795c-.008.004-1.974.97-2.064 1.011-2.24 1.086-6.799-7.82-4.609-9.848.182-.158.815-.398 1.058-.499l-3.521-6.818c-.195.098-1.355.687-1.546.826-3.346 2.431-1.931 11.769 4.561 17.549 7.434 6.659 15.998 4.498 17.789 1.567.154-.255.613-1.226.708-1.426l-8.855-4.567z" />
+                    </svg>
+                </div>
+
+                <div class="contact-details">
+                    <p class="contact-label">Phone</p>
+                    <p class="contact-value">
+                        <a href="tel:+15127976635">
+                            +1 (512) 797 - 6635
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z" />
+                    </svg>
+                </div>
+                <div class="contact-details">
+                    <p class="contact-label">Location</p>
+                    <p class="contact-value">Houston, TX</p>
+                </div>
+            </div>
+        </div>
+{% if messages %}
+        {% for message in messages %}
+            <p class="success-message">
+            {{ message }}
+            </p>
+        {% endfor %}
+{% endif %}
+        <form method="POST" class="contact-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+                <label for="email"><a href="mailto:diegosalvadorgutierrez@outlook.com">Email</a>
+                </label>
+                <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+                <label for="mesage">Message</label>
+                <textarea name="message" id="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-button">
+                Send Message
+            </button>
+        </form>
+    </div>
+</section>
+
+<!-- footer -->
+<footer class="footer">
+    <div class="footer-social">
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
+        </a>
+        <a href="mailto:your.email@example.com">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z" />
+            </svg>
+        </a>
+    </div>
+    <p class="footer-text">
+        © 2026 Diego S. Gutierrez. Made with ♥
+        in Houston, TX
+    </p>
+</footer>
+
+
+
+</div> <!-- End of main container -->
+
+<body></body>
+
+
+</html>
