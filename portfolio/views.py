@@ -31,14 +31,17 @@ def home(request):
             {message}
             """
             print(fullMessage)
-            send_mail(
-                subject="Portfolio Contact Form",
-                message = fullMessage,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=["diegosalvadorgutierrez@outlook.com"],
-            )
-            messages.success(request, "Your message was sent succesfully!")
+            try:
+                send_mail(
+                    subject="Portfolio Contact Form",
+                    message = fullMessage,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=["diegosalvadorgutierrez@outlook.com"],
+                )
+            except Exception as e:
+                print(f"Error sending email: {e}")
 
+            messages.success(request, "Your message was sent succesfully!")
             return redirect("home") ##todo :  fix this redirect to show success message without refreshing the page
 
     else:
