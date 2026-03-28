@@ -24,14 +24,14 @@ def home(request):
                 message=message
             )
 
-
-            fullMessage = f"""
-            Message from: {name}
-            Email: {email}
-            {message}
-            """
-            print(fullMessage)
             try:
+                fullMessage = f"""
+                Message from: {name}
+                Email: {email}
+                {message}
+                """
+                print(fullMessage)
+            
                 send_mail(
                     subject="Portfolio Contact Form",
                     message = fullMessage,
