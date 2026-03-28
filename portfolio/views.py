@@ -30,7 +30,7 @@ def home(request):
             Email: {email}
             {message}
             """
-
+            print(fullMessage)
             send_mail(
                 subject="Portfolio Contact Form",
                 message = fullMessage,
