@@ -37,6 +37,7 @@ def home(request):
                     message = fullMessage,
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     recipient_list=["diegosalvadorgutierrez@outlook.com"],
+                    fail_silently=False,
                 )
             except Exception as e:
                 print(f"Error sending email: {e}")
