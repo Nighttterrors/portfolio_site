@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://diegos-corner.onrender.com"]
+ALLOWED_HOSTS = ["diegos-corner.onrender.com"]
 
 # Application definition
 
