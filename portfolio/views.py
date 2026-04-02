@@ -23,11 +23,13 @@ def home(request):
                 email=email,
                 message=message
             )
+            
             fullMessage = f"""
                 Message from: {name}
                 Email: {email}
                 {message}
-                """           
+                """  
+            print(fullMessage)       
 
             try:
 
