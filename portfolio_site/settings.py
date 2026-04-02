@@ -28,6 +28,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ["diegos-corner.onrender.com"]
+CSRF_TRUSTED_ORIGINS = ["https://diegos-corner.onrender.com"]
 
 # Application definition
 
@@ -125,8 +126,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-DEFAULT_FROM_EMAIL = "portfolio@example.com"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

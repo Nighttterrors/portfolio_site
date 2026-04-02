@@ -34,7 +34,7 @@ def home(request):
             
                 send_mail(
                     subject="Portfolio Contact Form",
-                    message = fullMessage,
+                    message = message,
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     recipient_list=["diegosalvadorgutierrez@outlook.com"],
                     fail_silently=False,
