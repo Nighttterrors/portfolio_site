@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .models import ContactMessage
 from django.contrib import messages
+from django.urls import reverse
 
 
 # Create your views here.
@@ -23,7 +24,7 @@ def home(request):
                 email=email,
                 message=message
             )
-            
+
             fullMessage = f"""
                 Message from: {name}
                 Email: {email}
@@ -43,8 +44,11 @@ def home(request):
             except Exception as e:
                 print(f"Error sending email: {e}")
 
-            messages.success(request, "Your message was sent succesfully!")
-            return redirect("home") ##todo :  fix this redirect to show success message without refreshing the page
+            messages.success(request, "Your message was sent succesfully!😍")
+
+            url = reverse("home") + "#contact"
+            return redirect(url)
+            
 
     else:
         form = ContactForm()
