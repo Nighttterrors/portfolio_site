@@ -23,18 +23,17 @@ def home(request):
                 email=email,
                 message=message
             )
-
-            try:
-                fullMessage = f"""
+            fullMessage = f"""
                 Message from: {name}
                 Email: {email}
                 {message}
-                """
-                print(fullMessage)
-            
+                """           
+
+            try:
+
                 send_mail(
                     subject="Portfolio Contact Form",
-                    message = message,
+                    message = fullMessage,
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     recipient_list=["diegosalvadorgutierrez@outlook.com"],
                     fail_silently=False,

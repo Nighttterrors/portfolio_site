@@ -558,7 +558,7 @@ nav {
 .success-message{
     background:#d4edda;
     color:#155724;
-    padding:12px;
+    padding: 10px;
     border-radius:6px;
-    margin-bottom:15px;
+    margin: 0;
 }
