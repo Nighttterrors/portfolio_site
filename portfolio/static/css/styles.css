@@ -40,13 +40,16 @@ nav {
 }
 
 .nav-logo{
-    font-size: 1.5rem;
+    font-family: Ink Free;
+    font-size: 2rem;
     color: var(--color-gold);
     font-weight: 600;
     text-decoration: none;
 }
 
 .nav-links {
+    font-family: Ink Free;
+    font-size: 1.5rem;
     display: flex;
     gap: 2rem;
     list-style: none;
