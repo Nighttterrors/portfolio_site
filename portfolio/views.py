@@ -33,7 +33,7 @@ def home(request):
             print(fullMessage)       
 
             try:
-
+                print("About to send email...")
                 send_mail(
                     subject="Portfolio Contact Form",
                     message = fullMessage,
@@ -41,6 +41,7 @@ def home(request):
                     recipient_list=["diegosalvadorgutierrez@outlook.com"],
                     fail_silently=False,
                 )
+                print("Email sent successfully")
             except Exception as e:
                 print(f"Error sending email: {e}")
 
