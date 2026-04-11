@@ -130,15 +130,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_FAIL_SILENTLY = False
 EMAIL_TIMEOUT = 7  # seconds
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "").strip()
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "").strip()
-
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+DEFAULT_FROM_EMAIL = "diego@diegogutierrez.tech"
 
 STATIC_URL = '/static/'
 
