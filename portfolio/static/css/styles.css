@@ -105,6 +105,7 @@ nav {
     backdrop-filter: invert(80%) blur(10px);
     text-align: center;
     border-radius: 1cap;
+    width: stretch;
 }
 
 .hero-greeting{
