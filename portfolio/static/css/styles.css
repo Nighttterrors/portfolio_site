@@ -595,3 +595,85 @@ nav {
     text-align: center;
     font-weight: bolder;
 }
+/* MOBILE FIX */
+@media (max-width: 768px) {
+
+    /* NAV */
+    .nav-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        font-size: 1.2rem;
+        gap: 1rem;
+    }
+
+    /* HERO */
+    .hero-name {
+        font-size: 2.5rem;
+    }
+
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    /* ABOUT */
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* TIMELINE (THIS IS A BIG ONE) */
+    .timeline::before {
+        left: 10px;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .timeline-content {
+        width: 100%;
+    }
+
+    .timeline-item::after {
+        left: -.5px;
+        transform: none;
+        top: 75px;
+
+    }
+
+    /* SECTIONS */
+    .section {
+        padding: 3rem 1rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    /* PROJECT CARDS */
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* SOCIAL ICONS */
+    .social-link {
+        width: 40px;
+        height: 40px;
+    }
+}
