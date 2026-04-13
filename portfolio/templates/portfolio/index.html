@@ -9,6 +9,7 @@
     <link rel="icon" href="/favicon.ico">
     <link rel="icon" href="{% static 'images/favicon.ico' %}">
     <script src="{% static 'js/scripts.js' %}" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <div>
@@ -244,18 +245,15 @@
                     alt="Project 2" class="project-image" />
                 <div class="project-content">
                     <h3 class="project-title">
-                        Task Management App
+                        GoodReads Giveaway Bot
                     </h3>
                     <p class="project-description">
-                        A collaborative task management tool with
-                        real-time updates, drag-and-drop functionality,
-                        and team features.
+                        A Python script that automates the process of entering Goodreads giveaways by scraping giveaway pages and submitting entries using Selenium for browser automation.
                     </p>
                     <div class="project-tags">
-                        <span class="tag">TypeScript</span>
-                        <span class="tag">React</span>
-                        <span class="tag">Firebase</span>
-                        <span class="tag">Tailwind</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Selenium</span>
+                        <span class="tag">Web Scraping</span>
                     </div>
                     <div class="project-links">
                         <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-link">
@@ -346,8 +344,8 @@ is done
                 <div class="contact-details">
                     <p class="contact-label">Email</p>
                     <p class="contact-value">
-                        <a href="mailto:diegosalvadorgutierrez@outlook.com">
-                            diegosalvadorgutierrez@outlook.com
+                        <a href="mailto:diego@diegogutierrez.tech">
+                            diego@diegogutierrez.tech
                         </a>
                     </p>
                 </div>
@@ -368,9 +366,20 @@ is done
         </div>
 {% if messages %}
         {% for message in messages %}
-            <div class="success-message">
-            {{ message }}
-            </div>
+    <div class="alert {{ message.tags }}">
+      
+      {% if message.tags == "success" %}
+        <i class="fa-solid fa-circle-check"></i>
+      {% elif message.tags == "error" %}
+        <i class="fa-solid fa-circle-xmark"></i>
+      {% elif message.tags == "warning" %}
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      {% else %}
+        <i class="fa-solid fa-circle-info"></i>
+      {% endif %}
+
+     <p class="message">  {{ message }}</p>
+    </div>
         {% endfor %}
 {% endif %}
         <form method="POST" class="contact-form">

@@ -9,6 +9,18 @@ from django.urls import reverse
 
 # Create your views here.
 
+
+    # test = request.GET.get("test")
+
+    # if test == "success":
+    #     messages.success(request, "Success message — looks good!")
+    # elif test == "error":
+    #     messages.error(request, "Error message — something broke!")
+    # elif test == "warning":
+    #     messages.warning(request, "Warning message — check this!")
+    # elif test == "info":
+    #     messages.info(request, "Info message — just so you know!")
+  
 def home(request):
 
     if request.method == 'POST':
