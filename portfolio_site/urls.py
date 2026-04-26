@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('portfolio.urls')),
     path('favicon.ico', RedirectView.as_view(url='/static/images/favicon.ico')),
+    path('books/', include('bookclub.urls')),
 
 ]

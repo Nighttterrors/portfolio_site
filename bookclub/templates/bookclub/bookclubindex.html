@@ -1,0 +1,28 @@
+<h1>Book of the Month</h1>
+
+{% if book %}
+  <h2>{{ book.title }}</h2>
+  <p>by {{ book.author }}</p>
+
+  <p>{{ book.description }}</p>
+
+  <p>
+    ⭐ {{ book.average_rating|default:"No ratings yet" }}
+  </p>
+{% else %}
+  <p>No book selected yet.</p>
+  {% endif %}
+
+
+  <h2>Member Reviews</h2>
+
+{% for review in reviews %}
+  <div>
+    <strong>{{ review.user.username }}</strong>
+    <p>Rating: {{ review.rating }}/5</p>
+    <p>{{ review.content }}</p>
+    <small>{{ review.created_at }}</small>
+  </div>
+{% empty %}
+  <p>No reviews yet.</p>
+{% endfor %}
