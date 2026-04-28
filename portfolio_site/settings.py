@@ -28,13 +28,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 #'' 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "diegos-corner.onrender.com", 
     '127.0.0.1',
     'diegogutierrez.tech',
     'www.diegogutierrez.tech',]
+
+
 CSRF_TRUSTED_ORIGINS = ["https://diegos-corner.onrender.com"]
 
 # Application definition
@@ -144,3 +146,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+LOGIN_REDIRECT_URL = '/books/'
+LOGOUT_REDIRECT_URL = "/books/"
