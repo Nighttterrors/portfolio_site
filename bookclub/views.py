@@ -8,8 +8,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def book_home(request):
-    curBook = Book.objects.order_by('-month').first()
-    reviews = curBook.reviews.all()
+    curBook = Book.objects.order_by('-month').first() 
+    reviews = curBook.reviews.all() if curBook else []
 
     return render(request, "bookclub/bookclubindex.html" , {
         "book" : curBook,

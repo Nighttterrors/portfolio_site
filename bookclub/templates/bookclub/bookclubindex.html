@@ -1,5 +1,10 @@
 {% load static %}
-
+{% if request.user.is_authenticated %}
+  <form action="{% url 'logout' %}" method="POST" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+  </form>
+{% endif %}
 <h1>Book of the Month</h1>
 
 {% if book %}

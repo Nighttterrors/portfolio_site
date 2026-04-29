@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 #'' 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "diegos-corner.onrender.com", 
@@ -148,4 +148,5 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 LOGIN_REDIRECT_URL = '/books/'
-LOGOUT_REDIRECT_URL = "/books/"
+LOGOUT_REDIRECT_URL = '/books/accounts/login/'
+LOGIN_URL = '/books/accounts/login/'
