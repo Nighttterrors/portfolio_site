@@ -5,6 +5,11 @@
     <button type="submit">Logout</button>
   </form>
 {% endif %}
+{% if messages %}
+  {% for message in messages %}
+    <p>{{ message }}</p>
+  {% endfor %}
+{% endif %}
 <h1>Book of the Month</h1>
 
 {% if book %}
@@ -21,7 +26,16 @@
   <p>No book selected yet.</p>
   {% endif %}
 
-
+<h3>Add Your Review</h3>
+{% if existingReview %}
+  <p>You Already Reviewed this book.</p>
+{% else %}
+    <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Review</button>
+    </form>
+{% endif %}
   <h2>Member Reviews</h2>
 
 {% for review in reviews %}
