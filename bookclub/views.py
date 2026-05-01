@@ -3,14 +3,21 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
-
-from .models import Book
+from django.contrib.auth.models import User
+from .models import Book, Profile
 from .forms import ReviewForm
 
 
 
 @login_required
 def book_home(request):
+    #Get or create profile to avoid crashes
+    profile, _ = Profile.objects.get_or_create(user=request.user)
+    #Gate Access
+    if not profile.isApproved:
+        return render(request, "bookclub/pending.html")
+    
+    
     curBook = Book.objects.order_by('-month').first() 
     reviews = curBook.reviews.all() if curBook else []
     

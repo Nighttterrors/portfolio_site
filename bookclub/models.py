@@ -7,7 +7,7 @@ class Profile(models.Model):
     bio = models.TextField(blank=True)
     birthday = models.DateField(null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
-
+    isApproved = models.BooleanField(default=False)
     def __str__(self):
         return self.user.username
 
