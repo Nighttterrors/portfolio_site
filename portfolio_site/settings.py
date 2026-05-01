@@ -43,7 +43,7 @@ CSRF_TRUSTED_ORIGINS = ["https://diegos-corner.onrender.com"]
 
 INSTALLED_APPS = [
     'portfolio',
-    'bookclub',
+    'bookclub.apps.BookclubConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
