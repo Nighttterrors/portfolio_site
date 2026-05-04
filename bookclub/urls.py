@@ -11,4 +11,3 @@ urlpatterns = [
     path('signup/' , views.sign_up, name='signup'),
     # path('login/', auth_views.LoginView.as_view(template_name='bookclub/login.html'), name='login'),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
