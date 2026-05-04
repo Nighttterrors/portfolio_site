@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 #'' 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "diegos-corner.onrender.com", 
@@ -150,3 +150,11 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 LOGIN_REDIRECT_URL = '/books/'
 LOGOUT_REDIRECT_URL = '/books/accounts/login/'
 LOGIN_URL = '/books/accounts/login/'
+
+
+
+MEDIA_URL = '/media/'
+if os.getenv('RENDER'):
+    MEDIA_ROOT = '/var/data/media'
+else:
+    MEDIA_ROOT = BASE_DIR / 'media'

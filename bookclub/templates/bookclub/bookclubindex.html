@@ -40,7 +40,13 @@
 
 {% for review in reviews %}
   <div>
-    <strong>{{ review.user.username }}</strong>
+    {% if review.user.profile.profile_picture %}
+      <img src="{{ review.user.profile.profile_picture.url }}" width="40" height="40" style="border-radius:50%;">
+    {% else %}
+      <img src="{% static 'bookclub/images/defaultusericon.svg' %}" width="40">
+    {% endif %}
+    <strong>{{ review.user.username }}</strong> 
+
     <p>Rating: {{ review.rating }}/5</p>
     <p>{{ review.content }}</p>
     <small>{{ review.created_at }}</small>

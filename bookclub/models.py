@@ -8,6 +8,13 @@ class Profile(models.Model):
     birthday = models.DateField(null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     isApproved = models.BooleanField(default=False)
+    profile_picture = models.ImageField(
+        upload_to='profile_pics/',
+        blank=True,
+        null=True
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+   
     def __str__(self):
         return self.user.username
 
@@ -26,7 +33,7 @@ class Book(models.Model):
     def __str__(self):
         return f"{self.title} ({self.month})"
     
-
+    
 
 class Review(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="reviews")
