@@ -6,6 +6,32 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Book, Profile
 from .forms import ReviewForm
+from django.contrib.auth.decorators import user_passes_test
+
+
+
+
+def is_admin(user):
+    return user.is_staff
+
+@user_passes_test(is_admin)
+def approval_dashboard(request):
+    pending_users = Profile.objects.filter(isApproved=False).select_related('user')
+
+    return render(request, "bookclub/approval_dashboard.html", {
+        "pending_users": pending_users
+    })
+
+@user_passes_test(is_admin)
+def approve_user(request, user_id):
+    profile = Profile.objects.get(user__id=user_id)
+    profile.isApproved = True
+    profile.save()
+
+    return redirect("approval_dashboard")
+
+
+
 
 
 

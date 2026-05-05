@@ -1,0 +1,14 @@
+<h1>Pending Members</h1>
+
+{% for profile in pending_users %}
+  <div>
+    <p>{{ profile.user.username }}</p>
+
+    <form method="POST" action="{% url 'approve_user' profile.user.id %}">
+      {% csrf_token %}
+      <button type="submit">Approve</button>
+    </form>
+  </div>
+{% empty %}
+  <p>No pending users</p>
+{% endfor %}

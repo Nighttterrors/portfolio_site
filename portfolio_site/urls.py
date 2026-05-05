@@ -28,9 +28,21 @@ urlpatterns = [
     path('books/', include('bookclub.urls')),
 
 ]
+if settings.DEBUG:
+    # ✅ Dev: Django serves media automatically
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    # ✅ Prod: force Django to serve media
+    from django.views.static import serve
+    from django.urls import re_path
 
-urlpatterns += [
-    re_path(r'^media/(?P<path>.*)$', serve, {
-        'document_root': settings.MEDIA_ROOT,
-    }),
-]
+    urlpatterns += [
+        re_path(r'^media/(?P<path>.*)$', serve, {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+    ]
+# urlpatterns += [
+#     re_path(r'^media/(?P<path>.*)$', serve, {
+#         'document_root': settings.MEDIA_ROOT,
+#     }),
+# ]
