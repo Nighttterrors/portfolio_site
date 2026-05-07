@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from .models import Book, Profile
 from .forms import ReviewForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import user_passes_test
+from collections import defaultdict
 
 
 
@@ -44,7 +45,10 @@ def book_home(request):
         return render(request, "bookclub/pending.html")
     
     
-    curBook = Book.objects.order_by('-month').first() 
+    curBook = Book.objects.filter(is_current=True).first()
+    if not curBook:
+        curBook = Book.objects.order_by('-month').first() 
+        
     reviews = curBook.reviews.all() if curBook else []
     
     #Check if the user has already reviewed the book
@@ -131,4 +135,21 @@ def members(request):
 
     return render(request, 'bookclub/members.html', {
         'members' : members
+    })
+
+
+
+
+@login_required
+def timeline(request):
+    books = Book.objects.order_by('-month')
+
+    grouped_books = defaultdict(list)
+
+    for book in books:
+        year = book.month.year
+        grouped_books[year].append(book)
+
+    return render(request, 'bookclub/timeline.html', {
+        'grouped_books': dict(grouped_books)
     })

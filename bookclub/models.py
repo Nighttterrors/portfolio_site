@@ -26,7 +26,7 @@ class Book(models.Model):
     cover = models.ImageField(upload_to="covers/", null=True, blank=True)
     month = models.DateField() #Book of the month
     createdAt = models.DateTimeField(auto_now_add=True)
-
+    is_current = models.BooleanField(default=False)
     def average_rating(self):
         return self.reviews.aggregate(models.Avg("rating"))["rating__avg"]
 

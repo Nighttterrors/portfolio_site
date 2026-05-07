@@ -1,0 +1,43 @@
+<h1>Book Timeline</h1>
+
+{% for year, books in grouped_books.items %}
+
+    <h2>{{ year }}</h2>
+
+    <div style="margin-bottom: 40px;">
+
+        {% for book in books %}
+
+            <div style="border:1px solid #ccc; padding:15px; margin-bottom:15px; border-radius:10px;">
+
+                <h3>{{ book.title }}</h3>
+
+                <p><strong>Author:</strong> {{ book.author }}</p>
+
+                <p><strong>Month:</strong> {{ book.month }}</p>
+
+                {% if book.is_current %}
+                    <p>📖 Current Book</p>
+                {% endif %}
+
+                {% if book.cover %}
+                    <img src="{{ book.cover.url }}" width="120">
+                {% endif %}
+
+                <p>{{ book.description }}</p>
+
+                <p>
+                    ⭐ {{ book.average_rating|default:"No ratings yet" }}
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+{% empty %}
+
+    <p>No books yet.</p>
+
+{% endfor %}
