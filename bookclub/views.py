@@ -121,3 +121,14 @@ def sign_up(request):
     else:
         form = UserCreationForm()
     return render(request, 'bookclub/signup.html', {'form': form})
+
+
+@login_required
+def members(request):
+    members = Profile.objects.filter(
+        isApproved = True
+    ).select_related('user')
+
+    return render(request, 'bookclub/members.html', {
+        'members' : members
+    })

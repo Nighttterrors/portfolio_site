@@ -12,5 +12,6 @@ urlpatterns = [
     path("admin-dashboard/", views.approval_dashboard, name="approval_dashboard"),
     path("approve/<int:user_id>/", views.approve_user, name="approve_user"),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('members/', views.members, name='members'),
     # path('login/', auth_views.LoginView.as_view(template_name='bookclub/login.html'), name='login'),
 ]

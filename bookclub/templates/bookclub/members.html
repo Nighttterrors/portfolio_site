@@ -1,0 +1,55 @@
+{% load static %}
+
+<h1>Meet the Members</h1>
+
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+
+    {% for member in members %}
+
+        <div style="width: 22opx; border: 1px solid #ccc; padding: 15px; border-radius: 10px; text-align: center;">
+            {% if member.profile_picture %}
+                <img
+                    src="{{ member.profile_picture.url }}"
+                    width="120"
+                    height="120"
+                    style="border-radius: 50%; object-fit: cover;" 
+                    alt="Profile pic"
+                >
+            {% else %}
+                <img
+                    src="{% static 'bookclub/images/defaultusericon.svg' %}"
+                    width="120"
+                    height="120"
+                    style="border-radius:50%;"
+                    alt="defualt profile pic"
+                >
+            {% endif %}
+            <h3>
+                {% if member.user.first_name or member.user.last_name %}
+                    {{ member.user.first_name }} {{ member.user.last_name }}
+                {% else %}
+                    {{ member.user.username }}
+                {% endif %}
+            </h3>
+
+            <p>@{{ member.user.username }}</p>
+
+            {% if member.bio %}
+                <p>{{ member.bio }}</p>
+            {% else %}
+                <p>No bio yet.</p>
+            {% endif %}
+
+        </div>
+
+    {% empty %}
+
+        <p>No members yet.</p>
+
+    {% endfor %}
+ 
+        </div>
+
+
+</div>
