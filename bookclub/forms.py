@@ -1,5 +1,6 @@
 from django import forms
-from .models import Review
+from .models import Review, Profile
+from django.contrib.auth.models import User
 
 class ReviewForm(forms.ModelForm):
     class Meta:
@@ -9,3 +10,20 @@ class ReviewForm(forms.ModelForm):
             "rating" : forms.Select(choices=[(i, i) for i in range(1, 6)]),
             "content": forms.Textarea(attrs={"rows":4 , "placeholder" : "Share your thoughts ❤️" }),
         }
+
+
+
+
+class  UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+        
+
+
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['bio', 'birthday', 'profile_picture']

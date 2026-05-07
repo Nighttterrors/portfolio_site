@@ -5,7 +5,7 @@ from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Book, Profile
-from .forms import ReviewForm
+from .forms import ReviewForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import user_passes_test
 
 
@@ -79,6 +79,37 @@ def book_home(request):
         "existingReview" : existingReview
     })
 
+
+@login_required
+def edit_profile(request):
+    profile, _ = Profile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        user_form = UserUpdateForm(
+            request.POST,
+            instance=request.user
+        )
+
+        profile_form = ProfileUpdateForm(
+            request.POST,
+            request.FILES,
+            instance=profile
+        )
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+
+            return redirect('book_home')
+
+    else:
+        user_form = UserUpdateForm(instance=request.user)
+        profile_form = ProfileUpdateForm(instance=profile)
+
+    return render(request, 'bookclub/edit_profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form,
+    })
 
 
 def sign_up(request):
