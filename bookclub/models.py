@@ -27,6 +27,17 @@ class Book(models.Model):
     month = models.DateField() #Book of the month
     createdAt = models.DateTimeField(auto_now_add=True)
     is_current = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        if self.is_current:
+            Book.objects.filter(
+                is_current=True
+            ).exclude(
+                pk=self.pk
+            ).update(is_current=False)
+
+        super().save(*args, **kwargs)
+        
     def average_rating(self):
         return self.reviews.aggregate(models.Avg("rating"))["rating__avg"]
 

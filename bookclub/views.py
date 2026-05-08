@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Book, Profile
-from .forms import ReviewForm, UserUpdateForm, ProfileUpdateForm
+from .forms import ReviewForm, UserUpdateForm, ProfileUpdateForm, BookForm
 from django.contrib.auth.decorators import user_passes_test
 from collections import defaultdict
 
@@ -17,10 +17,28 @@ def is_admin(user):
 
 @user_passes_test(is_admin)
 def approval_dashboard(request):
+
     pending_users = Profile.objects.filter(isApproved=False).select_related('user')
+    approved_users = Profile.objects.filter(isApproved=True).select_related('user')
+
+    if request.method == 'POST':
+        book_form = BookForm(
+            request.POST,
+            request.FILES
+        )
+
+        if book_form.is_valid():
+            book_form.save()
+            return redirect('approval_dashboard')
+    else:
+        book_form = BookForm()
+
+
 
     return render(request, "bookclub/approval_dashboard.html", {
-        "pending_users": pending_users
+        "pending_users": pending_users,
+        'approved_users': approved_users,
+        'book_form' : book_form,
     })
 
 @user_passes_test(is_admin)
@@ -153,3 +171,16 @@ def timeline(request):
     return render(request, 'bookclub/timeline.html', {
         'grouped_books': dict(grouped_books)
     })
+
+
+@user_passes_test(is_admin)
+def delete_member(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+
+    # Prevent deleting yourself
+    if user == request.user:
+        return redirect('approval_dashboard')
+
+    user.delete()
+
+    return redirect('approval_dashboard')

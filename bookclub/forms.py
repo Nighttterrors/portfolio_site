@@ -1,5 +1,5 @@
 from django import forms
-from .models import Review, Profile
+from .models import Review, Profile, Book
 from django.contrib.auth.models import User
 
 class ReviewForm(forms.ModelForm):
@@ -27,3 +27,17 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['bio', 'birthday', 'profile_picture']
+
+
+
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = [
+            'title',
+            'author',
+            'description',
+            'cover',
+            'month',
+            'is_current'
+        ]

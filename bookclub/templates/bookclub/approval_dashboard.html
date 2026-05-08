@@ -12,3 +12,42 @@
 {% empty %}
   <p>No pending users</p>
 {% endfor %}
+
+
+{% for profile in approved_users %}
+
+<div style="margin-bottom:20px; border:1px solid #ccc; padding:10px;">
+
+    {% if profile.profile_picture %}
+        <img src="{{ profile.profile_picture.url }}" width="60">
+    {% endif %}
+
+    <p>
+        {{ profile.user.first_name }}
+        {{ profile.user.last_name }}
+        (@{{ profile.user.username }})
+    </p>
+
+    <p>{{ profile.user.email }}</p>
+
+    <form method="POST" action="{% url 'delete_member' profile.user.id %}">
+        {% csrf_token %}
+        <button type="submit">Delete Member</button>
+    </form>
+
+</div>
+
+{% empty %}
+<p>No approved users.</p>
+{% endfor %}
+
+
+<h2>Add New Book</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ book_form.as_p }}
+
+    <button type="submit">Add Book</button>
+</form>
