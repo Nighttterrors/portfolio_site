@@ -1,0 +1,63 @@
+{% load static %}
+
+<h1>{{ book.title }} Discussion Board</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Post</button>
+</form>
+
+<hr>
+
+{% for post in posts %}
+
+    <div style="margin-bottom:20px; border:1px solid #ccc; padding:15px; border-radius:10px;">
+
+        <div style="display:flex; align-items:center; gap:10px;">
+
+            {% if post.user.profile.profile_picture %}
+                <img
+                    src="{{ post.user.profile.profile_picture.url }}"
+                    width="50"
+                    height="50"
+                    style="border-radius:50%; object-fit:cover;"
+                >
+            {% else %}
+                <img
+                    src="{% static 'bookclub/images/defaultusericon.svg' %}"
+                    width="50"
+                    height="50"
+                >
+            {% endif %}
+
+            <div>
+                <strong>
+                    {% if post.user.first_name %}
+                        {{ post.user.first_name }}
+                        {{ post.user.last_name }}
+                    {% else %}
+                        {{ post.user.username }}
+                    {% endif %}
+                </strong>
+
+                <br>
+
+                <small>{{ post.created_at }}</small>
+            </div>
+
+        </div>
+
+        <p style="margin-top:10px;">
+            {{ post.content }}
+        </p>
+
+    </div>
+
+{% empty %}
+
+    <p>No discussion posts yet.</p>
+
+{% endfor %}

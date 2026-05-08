@@ -1,5 +1,5 @@
 from django import forms
-from .models import Review, Profile, Book
+from .models import Review, Profile, Book, DiscussionPost
 from django.contrib.auth.models import User
 
 class ReviewForm(forms.ModelForm):
@@ -41,3 +41,11 @@ class BookForm(forms.ModelForm):
             'month',
             'is_current'
         ]
+
+
+
+
+class DiscussionPostForm(forms.ModelForm):
+    class Meta:
+        model = DiscussionPost
+        fields = ['content']

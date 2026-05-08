@@ -37,7 +37,7 @@ class Book(models.Model):
             ).update(is_current=False)
 
         super().save(*args, **kwargs)
-        
+
     def average_rating(self):
         return self.reviews.aggregate(models.Avg("rating"))["rating__avg"]
 
@@ -54,6 +54,24 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     class Meta:
         unique_together = ("book", "user")  # one review per user per book
+
+    def __str__(self):
+        return f"{self.user.username} - {self.book.title}"
+
+
+
+class DiscussionPost(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    book = models.ForeignKey(
+        Book,
+        on_delete=models.CASCADE,
+        related_name='discussion_posts'
+    )
+
+    content = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.user.username} - {self.book.title}"

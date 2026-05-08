@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import Book, Profile
-from .forms import ReviewForm, UserUpdateForm, ProfileUpdateForm, BookForm
+from .models import Book, Profile, DiscussionPost
+from .forms import ReviewForm, UserUpdateForm, ProfileUpdateForm, BookForm, DiscussionPostForm
 from django.contrib.auth.decorators import user_passes_test
 from collections import defaultdict
 
@@ -184,3 +184,44 @@ def delete_member(request, user_id):
     user.delete()
 
     return redirect('approval_dashboard')
+
+
+
+@login_required
+def forum(request):
+
+    current_book = Book.objects.filter(
+        is_current=True
+    ).first()
+
+    if not current_book:
+        return render(request, 'bookclub/forum.html', {
+            'error': 'No current book selected.'
+        })
+
+    posts = current_book.discussion_posts.select_related(
+        'user',
+        'user__profile'
+    ).order_by('-created_at')
+
+    if request.method == 'POST':
+        form = DiscussionPostForm(request.POST)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+
+            post.user = request.user
+            post.book = current_book
+
+            post.save()
+
+            return redirect('forum')
+
+    else:
+        form = DiscussionPostForm()
+
+    return render(request, 'bookclub/forum.html', {
+        'book': current_book,
+        'posts': posts,
+        'form': form,
+    })
