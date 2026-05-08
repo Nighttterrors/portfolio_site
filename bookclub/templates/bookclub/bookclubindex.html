@@ -15,7 +15,7 @@
 <h1>Book of the Month</h1>
 
 {% if book %}
-  <img src="{% static 'bookclub/images/jd.webp' %}" alt="book cover" style="width: 150px; height: auto;">
+<img src="{{ book.cover.url }}" alt="{{ book.title }}" style="width: 150px; height: auto;">
   <h2>{{ book.title }}</h2>
   <p>by {{ book.author }}</p>
 
@@ -45,7 +45,7 @@
     {% if review.user.profile.profile_picture %}
       <img src="{{ review.user.profile.profile_picture.url }}" width="40" height="40" style="border-radius:50%;">
     {% else %}
-      <img src="{% static 'bookclub/images/defaultusericon.svg' %}" width="40">
+      <img src="{{}}" width="40">
     {% endif %}
     <strong>{{ review.user.username }}</strong> 
 
