@@ -8,6 +8,7 @@ from .models import Book, Profile, DiscussionPost
 from .forms import ReviewForm, UserUpdateForm, ProfileUpdateForm, BookForm, DiscussionPostForm
 from django.contrib.auth.decorators import user_passes_test
 from collections import defaultdict
+from django.contrib.auth import authenticate, login
 
 
 
@@ -149,10 +150,13 @@ def sign_up(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
-    else:
-        form = UserCreationForm()
-    return render(request, 'bookclub/signup.html', {'form': form})
+            return redirect('/books/?login=1')
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, error)
+            return redirect('/books/?signup=1')       
+    return redirect('landing_page')
 
 
 @login_required
@@ -235,3 +239,36 @@ def forum(request):
         'posts': posts,
         'form': form,
     })
+
+
+
+
+def custom_login(request):
+
+    if request.method == "POST":
+
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+
+        if user is not None:
+
+            login(request, user)
+
+            return redirect('book_home')
+
+        else:
+
+            messages.error(
+                request,
+                "Invalid username or password."
+            )
+
+            return redirect('/books/?login=1')
+
+    return redirect('landing_page')

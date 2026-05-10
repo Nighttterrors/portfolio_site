@@ -1,0 +1,365 @@
+/* Book Club Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-primary: #C9ADA7;
+  --color-accent: #9D8189;
+  --color-light: #FAF7F4;
+  --color-cream: #FFF8F3;
+  --color-text: #4A4A4A;
+  --color-text-light: #767676;
+}
+
+body {
+  font-family: 'Georgia', 'Garamond', serif;
+  line-height: 1.7;
+  color: var(--color-text);
+  background: var(--color-light);
+  
+}
+
+.book-club-app {
+  min-height: 100vh;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  padding: 1rem 0;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-family: 'Georgia', serif;
+  gap: 1rem;
+}
+.nav-logo-image {
+  width: 28px;
+  height: 28px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.3s;
+  font-size: 0.95rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;;
+}
+
+.nav-links a:hover {
+  color: var(--color-accent);
+}
+
+.land-nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.btn-text:hover {
+  color: var(--color-accent);
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  padding: 0.1rem .35rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(157, 129, 137, 0.3);
+}
+.landing-book{
+    
+  width:100%;
+  border-radius:16px;
+  margin-bottom:1.5rem;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+            
+}
+
+/* Landing Page */
+
+.landing-hero {
+  min-height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 120px 5% 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5rem;
+}
+
+.landing-content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.landing-subtitle {
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.landing-title {
+  font-size: 4rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+}
+
+.landing-description {
+  font-size: 1.1rem;
+  color: var(--color-text-light);
+  margin-bottom: 2rem;
+  max-width: 500px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.landing-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.landing-book {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Book Card */
+
+.book-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 24px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+
+  max-width: 340px;
+  text-align: center;
+}
+
+.book-cover {
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.book-label {
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.book-title {
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.book-author {
+  color: var(--color-text-light);
+  margin-bottom: 1rem;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.book-rating {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Modal */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 2000;
+
+  backdrop-filter: blur(4px);
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 420px;
+
+  background: white;
+
+  padding: 3rem;
+  border-radius: 24px;
+
+  position: relative;
+
+  box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+}
+
+.modal-close {
+  position: absolute;
+
+  top: 1rem;
+  right: 1rem;
+
+  background: none;
+  border: none;
+
+  font-size: 1.5rem;
+
+  cursor: pointer;
+
+  color: var(--color-text-light);
+}
+
+.modal-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-subtitle {
+  color: var(--color-text-light);
+  margin-bottom: 2rem;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.95rem;
+  color: var(--color-text);
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.form-group input {
+  padding: 0.9rem 1rem;
+
+  border-radius: 12px;
+  border: 1px solid #ddd;
+
+  font-size: 1rem;
+
+  outline: none;
+
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  border-color: var(--color-accent);
+}
+
+.modal-submit {
+  margin-top: 1rem;
+  padding: 0.9rem 1.2rem;
+}
+/* Responsive */
+
+@media (max-width: 900px) {
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .landing-hero {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 140px;
+  }
+
+  .landing-title {
+    font-size: 3rem;
+  }
+
+  .landing-buttons {
+    justify-content: center;
+  }
+
+  .landing-content {
+    max-width: 100%;
+  }
+}

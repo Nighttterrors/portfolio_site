@@ -1,169 +1,280 @@
 {% load static %}
 
-
-
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Club</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f5f1ea;
-            color: #222;
-        }
+  <title>The Book Club</title>
 
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 80px;
-            gap: 50px;
-        }
+  <link rel="stylesheet"
+        href="{% static 'bookclub/css/styles.css' %}">
 
-        .hero-left {
-            max-width: 550px;
-        }
+ 
 
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            line-height: 1.7;
-            margin-bottom: 30px;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 14px 28px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: 0.2s ease;
-        }
-
-        .btn-primary {
-            background-color: #222;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            opacity: 0.9;
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            border: 1px solid #222;
-            color: #222;
-        }
-
-        .book-showcase {
-            text-align: center;
-        }
-
-        .book-showcase img {
-            width: 300px;
-            border-radius: 12px;
-            box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
-        }
-
-        .book-meta {
-            margin-top: 20px;
-        }
-
-        .book-meta h2 {
-            margin-bottom: 5px;
-        }
-
-        .book-meta p {
-            color: #666;
-        }
-
-        @media(max-width: 900px) {
-
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 40px;
-            }
-
-            .btn-group {
-                justify-content: center;
-            }
-
-            .book-showcase img {
-                width: 220px;
-            }
-
-            .hero h1 {
-                font-size: 3rem;
-            }
-        }
-
-    </style>
+  <script src="{% static 'bookclub/js/scripts.js' %}" defer></script>
 </head>
+
 <body>
 
-<section class="hero">
+<div class="book-club-app">
 
-    <div class="hero-left">
+  <!-- NAVIGATION -->
+  <nav class="nav">
 
-        <h1>Welcome to the Book Club</h1>
+    <div class="nav-container">
 
-        <p>
-            Read monthly picks, discuss with members,
-            track past books, and share your thoughts
-            with the community.
-        </p>
+      <a href="#" class="nav-logo">
+        <img
+         src="{% static 'bookclub/images/book_club_logo.svg '%}"
+         alt="The Book Club Logo" 
+         class="nav-logo-image">
+         The Book Club
+      </a>
 
-        <div class="btn-group">
+      <div class="nav-actions">
+        <ul class="nav-links">
 
-            <a href="{% url 'signup' %}" class="btn btn-primary">
-                Join the Club
-            </a>
+            <li class="btn-primary"> 
+                <button 
+                class="btn-text"
+                onclick="showLoginModal()"
+                type="button">
+                    Login
+                </button>
+            </li>
 
-            <a href="{% url 'login' %}" class="btn btn-secondary">
-                Login
-            </a>
+        <li class = "btn-primary">
+                <button 
+                class="btn-text"
+                onclick="showSignupModal()"
+                type="button">
+                    Join us
+                </button>
+        </li>
+        </ul>
 
-        </div>
-
-    </div>
-
-    <div class="book-showcase">
-
-        {% if book.cover %}
-            <img src="{{ book.cover.url }}" alt="{{ book.title }}">
-        {% endif %}
-
-        <div class="book-meta">
-            <h2>{{ book.title }}</h2>
-            <p>by {{ book.author }}</p>
-
-            {% if book.is_current %}
-                <strong>📖 Book of the Month</strong>
-            {% endif %}
-        </div>
+      </div>
 
     </div>
 
-</section>
+  </nav>
 
+  <!-- HERO -->
+  <section class="landing-hero">
+
+    <div class="landing-content">
+
+      <p class="landing-subtitle">
+        Monthly Book Discussions
+      </p>
+
+      <h1 class="landing-title">
+        Discover stories worth talking about.
+      </h1>
+
+      <p class="landing-description">
+        Join a growing community of readers sharing reviews,
+        discussions, and monthly picks curated for meaningful
+        conversations.
+      </p>
+
+      <div class="landing-buttons">
+    <div class="nav-container">
+
+
+
+
+    </div>
+
+      </div>
+
+    </div>
+
+    <div class="landing-book">
+
+      {% if book.cover %}
+
+        <div class="book-card">
+
+          <img
+            src="{{ book.cover.url }}"
+            alt="{{ book.title }}"
+            class="book-cover"
+          >
+
+          <p class="book-label">
+            Current Pick
+          </p>
+
+          <h2 class="book-title">
+            {{ book.title }}
+          </h2>
+
+          <p class="book-author">
+            by {{ book.author }}
+          </p>
+
+          <p class="book-rating">
+            ⭐ {{ book.average_rating|default:"No ratings yet" }}
+          </p>
+
+        </div>
+
+      {% endif %}
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<div class="modal-overlay" id="loginModal">
+
+  <div class="modal-card">
+
+    <button
+      class="modal-close"
+      onclick="hideLoginModal()"
+    >
+      ×
+    </button>
+
+    <h2 class="modal-title">
+      Welcome Back
+    </h2>
+      {% if messages %}
+        {% for message in messages %}
+            <p class="modal-subtitle">
+              {{message}}
+            </p>
+        {% endfor %}
+      {% endif %}
+
+    
+    <p class="modal-subtitle">
+        
+    </p>
+
+    <form
+      method="POST"
+      action="{% url 'custom_login' %}"
+      class="modal-form"
+    >
+
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label>Username</label>
+        <input
+          type="text"
+          name="username"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          required
+        >
+      </div>
+
+      <button
+        type="submit"
+        class="btn-primary modal-submit"
+      >
+        Login
+      </button>
+
+    </form>
+</div>
+</div>
+
+
+<div class="modal-overlay" id="signupModal">
+
+  <div class="modal-card">
+
+    <button
+      class="modal-close"
+      onclick="hideSignupModal()"
+    >
+      ×
+    </button>
+
+    <h2 class="modal-title">
+      Join the Club
+    </h2>
+
+
+    <p class="modal-subtitle">
+      Create an account to join discussions,
+      reviews, and monthly reads.
+    </p>
+      {% if messages %}
+        {% for message in messages %}
+            <p class="modal-subtitle">
+              {{message}}
+            </p>
+        {% endfor %}
+      {% endif %}
+       
+
+
+
+    <form
+      method="POST"
+      action="{% url 'signup' %}"
+      class="modal-form"
+    >
+    {% csrf_token %}
+
+      <div class="form-group">
+        <label>Username</label>
+
+        <input
+          type="text"
+          name="username"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+
+        <input
+          type="password"
+          name="password1"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Confirm Password</label>
+
+        <input
+          type="password"
+          name="password2"
+          required
+        >
+      </div>
+
+      <button
+        type="submit"
+        class="btn-primary modal-submit"
+      >
+        Create Account
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
 </body>
 </html>

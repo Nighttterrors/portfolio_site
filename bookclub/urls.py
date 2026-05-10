@@ -17,5 +17,6 @@ urlpatterns = [
     path('timeline/', views.timeline, name='timeline'),
     path('delete-member/<int:user_id>/', views.delete_member, name='delete_member'),
     path('forum/', views.forum, name='forum'),
+    path('login/', views.custom_login, name='custom_login'),
     # path('login/', auth_views.LoginView.as_view(template_name='bookclub/login.html'), name='login'),
 ]
