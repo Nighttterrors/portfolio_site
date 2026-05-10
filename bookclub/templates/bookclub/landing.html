@@ -1,0 +1,169 @@
+{% load static %}
+
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Club</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f1ea;
+            color: #222;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px;
+            gap: 50px;
+        }
+
+        .hero-left {
+            max-width: 550px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: #222;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid #222;
+            color: #222;
+        }
+
+        .book-showcase {
+            text-align: center;
+        }
+
+        .book-showcase img {
+            width: 300px;
+            border-radius: 12px;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .book-meta {
+            margin-top: 20px;
+        }
+
+        .book-meta h2 {
+            margin-bottom: 5px;
+        }
+
+        .book-meta p {
+            color: #666;
+        }
+
+        @media(max-width: 900px) {
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px;
+            }
+
+            .btn-group {
+                justify-content: center;
+            }
+
+            .book-showcase img {
+                width: 220px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<section class="hero">
+
+    <div class="hero-left">
+
+        <h1>Welcome to the Book Club</h1>
+
+        <p>
+            Read monthly picks, discuss with members,
+            track past books, and share your thoughts
+            with the community.
+        </p>
+
+        <div class="btn-group">
+
+            <a href="{% url 'signup' %}" class="btn btn-primary">
+                Join the Club
+            </a>
+
+            <a href="{% url 'login' %}" class="btn btn-secondary">
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="book-showcase">
+
+        {% if book.cover %}
+            <img src="{{ book.cover.url }}" alt="{{ book.title }}">
+        {% endif %}
+
+        <div class="book-meta">
+            <h2>{{ book.title }}</h2>
+            <p>by {{ book.author }}</p>
+
+            {% if book.is_current %}
+                <strong>📖 Book of the Month</strong>
+            {% endif %}
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

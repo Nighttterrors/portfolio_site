@@ -1,17 +1,89 @@
 {% load static %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
 {% if request.user.is_authenticated %}
-  <form action="{% url 'logout' %}" method="POST" style="display:inline;">
-    {% csrf_token %}
-    <button type="submit">Logout</button>
-  </form>
+
+<div class="book-club-app">
+  <nav class="nav">  
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          style="margin-right: 8px;"
+          >
+            <path d="M6.012 18h-5.012v-13h5.012c1.257 0 2.194.188 2.812.564.617.375.926 1.059.926 2.051 0 .518-.111.94-.334 1.264-.223.324-.527.565-.913.723.456.171.81.46 1.062.867s.378.889.378 1.447c0 .977-.316 1.656-.948 2.037-.632.381-1.623.572-2.973.572zm-.012-2v-3h.037c.622 0 1.045.076 1.27.229.224.152.336.425.336.817 0 .358-.127.619-.382.782-.255.164-.7.246-1.336.246h-.925zm0-5v-3h.037c.549 0 .925.064 1.128.193.203.128.305.354.305.677 0 .333-.11.573-.33.719-.22.146-.611.22-1.173.22h-.967zm8.012-7h5.012v13h-5.012c-1.257 0-2.194-.188-2.812-.564-.617-.375-.926-1.059-.926-2.051 0-.518.111-.94.334-1.264.223-.324.527-.565.913-.723-.456-.171-.81-.46-1.062-.867s-.378-.889-.378-1.447c0-.977.316-1.656.948-2.037.632-.381 1.623-.572 2.973-.572zm.012 2v3h-.037c-.622 0-1.045-.076-1.27-.229-.224-.152-.336-.425-.336-.817 0-.358.127-.619.382-.782.255-.164.7-.246 1.336-.246h.925zm0 5v3h-.037c-.549 0-.925-.064-1.128-.193-.203-.128-.305-.354-.305-.677 0-.333.11-.573.33-.719.22-.146.611-.22 1.173-.22h.967z"/>
+        </svg>
+        The Reading Circle
+      </a>
+
+      {% if messages %}
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+      <ul class="nav-links">
+
+        <li>
+          <a href="{% url 'timeline' %}">Timeline</a>
+        </li>
+        <li>
+          <a href="{% url 'members' %}">Meet the Members</a>
+        </li>
+
+        <li>
+          <a href="#book-of-the-month">Book of the Month</a>
+        </li>
+        <li>
+          <a href="#reviews">
+            Reviews
+          </a>
+        </li>
+        <li>
+          <a href="#forum">
+            Forum
+          </a>
+        </li>
+        <li>
+          <form action="{% url 'logout' %}" method="POST"              style="display:inline;  ">
+            {% csrf_token %} 
+            <button type="submit">Logout</button>
+          </form>
+        </li>
+      </ul>
+      <div class="nav-actions">
+        <button
+        class="btn-text"
+        onclick="shoLoginModal()"
+        >
+        Login
+        </button>
+        <button
+        class="btn-text"
+        onclick="shoLoginModal()"
+        >
+        Join Us
+        </button>
+      </div>
+    </div>
 {% endif %}
-{% if messages %}
-  {% for message in messages %}
-    <p>{{ message }}</p>
-  {% endfor %}
-{% endif %}
-<a href="{% url 'members' %}">Meet the Members</a>
-<a href="{% url 'timeline' %}">Timeline</a>
+
+
+</nav>
+
+
+
+
+
 <h1>Book of the Month</h1>
 
 {% if book %}
@@ -43,9 +115,9 @@
 {% for review in reviews %}
   <div>
     {% if review.user.profile.profile_picture %}
-      <img src="{{ review.user.profile.profile_picture.url }}" width="40" height="40" style="border-radius:50%;">
+      <img src="{{ review.user.profile.profile_picture.url }}" width="40" height="40" style="border-radius:50%;" alt="{{ review.user.username }}'s profile picture">
     {% else %}
-      <img src="{% static 'bookclub/images/defaultusericon.svg' %}" width="40">
+      <img src="{% static 'bookclub/images/defaultusericon.svg' %}" width="40" alt="Default user icon">
     {% endif %}
     <strong>{{ review.user.username }}</strong> 
 
@@ -56,3 +128,9 @@
 {% empty %}
   <p>No reviews yet.</p>
 {% endfor %}
+  
+</div>
+
+  
+</body>
+</html>

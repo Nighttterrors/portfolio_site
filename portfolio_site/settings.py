@@ -147,8 +147,8 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-LOGIN_REDIRECT_URL = '/books/'
-LOGOUT_REDIRECT_URL = '/books/accounts/login/'
+LOGIN_REDIRECT_URL = '/books/home/'
+LOGOUT_REDIRECT_URL = '/books/'
 LOGIN_URL = '/books/accounts/login/'
 
 

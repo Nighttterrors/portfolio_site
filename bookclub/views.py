@@ -15,6 +15,16 @@ from collections import defaultdict
 def is_admin(user):
     return user.is_staff
 
+def landing_page(request):
+    current_book = Book.objects.filter(
+        is_current = True
+    ).first()
+
+    return render(request, 'bookclub/landing.html', {
+        'book' : current_book
+    })
+
+
 @user_passes_test(is_admin)
 def approval_dashboard(request):
 
