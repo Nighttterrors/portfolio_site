@@ -22,6 +22,19 @@ function hideSignupModal() {
     .classList.remove("active");
 }
 
+
+function toggleMobileMenu() {
+
+  document
+    .getElementById("mobileMenu")
+    .classList.toggle("mobile-active");
+
+  document
+    .querySelector(".mobile-menu-btn")
+    .classList.toggle("active");
+}
+
+
 window.onload = function() {
 
     const params = new URLSearchParams(window.location.search);

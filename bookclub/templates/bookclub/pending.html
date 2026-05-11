@@ -1,3 +1,60 @@
-<h2>Account Pending Approval</h2>
-<p>Your account is waiting for admin approval.</p>
-<p>Please check back later.</p>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Approval Pending</title>
+
+  <link rel="stylesheet"
+        href="{% static 'bookclub/css/styles.css' %}">
+
+</head>
+
+<body>
+
+<div class="pending-page">
+
+  <div class="pending-card">
+
+    <div class="pending-icon">
+
+      <svg
+        width="36"
+        height="36"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+      >
+        <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+      </svg>
+
+    </div>
+
+    <h1 class="pending-title">
+      Approval Pending
+    </h1>
+
+    <p class="pending-description">
+
+      Your account has been created successfully
+      and is currently awaiting approval from
+      the book club admins.
+
+    </p>
+
+    <div class="pending-note">
+
+      You’ll gain access to discussions, reviews,
+      timelines, and member features once approved.
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

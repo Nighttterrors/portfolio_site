@@ -35,7 +35,25 @@
           <p>{{ message }}</p>
         {% endfor %}
       {% endif %} -->
-      <ul class="nav-links">
+
+      <button 
+        class="mobile-menu-btn"
+        onclick="toggleMobileMenu()">
+        <img
+          src="{% static 'bookclub/images/book-closed.svg' %}"
+          alt="Open Menu"
+          class="menu-icon closed-book"
+          id="closedBook"
+        >
+
+        <img
+          src="{% static 'bookclub/images/book-open.svg' %}"
+          alt="Close Menu"
+          class="menu-icon open-book"
+          id="openBook"
+        >
+      </button>
+      <ul class="nav-links" id="mobileMenu">
 
         <li>
           <a href="{% url 'timeline' %}">Timeline</a>
@@ -53,7 +71,7 @@
           </a>
         </li>
         <li>
-          <a href="#forum">
+          <a href="{% url 'forum'%}">
             Forum
           </a>
         </li>
@@ -64,25 +82,24 @@
           </form>
         </li>
       </ul>
-      <!-- <div class="nav-actions">
-        <button
-        class="btn-text"
-        onclick="shoLoginModal()"
-        >
-        Login
-        </button>
-        <button
-        class="btn-text"
-        onclick="shoLoginModal()"
-        >
-        Join Us
-        </button>
-      </div> -->
     </div>
 {% endif %}
-
-
 </nav>
+
+
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title fade-in">Welcome to The Reading Circle</h1>
+    <p class="hero-subtitle fade-in">
+      A community of women who love to read, discuss, and connect
+    </p>
+    <p class="hero-description fade-in">
+      We explore compelling stories,
+      share thoughtful reviews, and build lasting friendships through our
+      love of literature.
+    </p>
+  </div>
+</section>
 
 
 
@@ -117,7 +134,7 @@
   <h2>Member Reviews</h2>
 
 {% for review in reviews %}
-  <div>
+  <div id="reviews">
     {% if review.user.profile.profile_picture %}
       <img src="{{ review.user.profile.profile_picture.url }}" width="40" height="40" style="border-radius:50%;" alt="{{ review.user.username }}'s profile picture">
     {% else %}
