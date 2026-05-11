@@ -124,7 +124,7 @@ body {
   box-shadow: 0 4px 12px rgba(157, 129, 137, 0.3);
 }
 .landing-book{
-    
+  
   width:100%;
   border-radius:16px;
   margin-bottom:1.5rem;
@@ -512,7 +512,11 @@ body {
 .mobile-menu-btn.active .open-book {
   display: block;
 }
-
+.land-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  list-style: n
 /* Responsive */
 
 @media (max-width: 900px) {
