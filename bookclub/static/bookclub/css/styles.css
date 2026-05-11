@@ -123,14 +123,7 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(157, 129, 137, 0.3);
 }
-.landing-book{
-  
-  width:100%;
-  border-radius:16px;
-  margin-bottom:1.5rem;
-  box-shadow:0 10px 25px rgba(0,0,0,0.15);
-            
-}
+
 
 /* Landing Page */
 
@@ -183,7 +176,6 @@ body {
 
 .landing-book {
   flex: 1;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -516,7 +508,8 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
-  list-style: n
+  list-style: none;
+}
 /* Responsive */
 
 @media (max-width: 900px) {
