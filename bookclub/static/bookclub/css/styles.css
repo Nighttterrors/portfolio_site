@@ -375,6 +375,61 @@ body {
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
+
+
+.profile-edit {
+  display: flex;
+  flex-direction: column;
+}
+.profile-edit-page { 
+  margin: 1rem auto;
+  display: flex;
+  gap: 5rem;
+
+}
+.profile-edit-page p{
+  margin: .5rem
+}
+.profile-edit-page header{
+  align-content: center;
+  font-size: xxx-large;
+  margin: 4rem;
+}
+.profile-edit-page input{
+  margin: auto auto auto 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  outline: none;
+}
+.profile-edit-title {
+  text-align:center; 
+  font-size:x-large;
+  margin: 1rem;
+}
+.edit-profile-pic{
+  margin: 6rem auto 4rem auto;
+  border-radius: 50%; 
+  object-fit: cover;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.edit-profile-pic:hover {
+  transform: scale(1.25);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.15);
+}
+
+
+
+
+
+
+
 /* Modal */
 
 .modal-overlay {
