@@ -213,10 +213,17 @@ def forum(request):
             'error': 'No current book selected.'
         })
 
-    posts = current_book.discussion_posts.select_related(
-        'user',
-        'user__profile'
-    ).order_by('-created_at')
+    posts = (
+        DiscussionPost.objects
+        .filter(book=current_book)
+        .select_related('user')
+        .prefetch_related(
+            'likes',
+            'replies',
+            'replies__user'
+        )
+        .order_by('-created_at')
+    )
 
     if request.method == 'POST':
         form = DiscussionPostForm(request.POST)

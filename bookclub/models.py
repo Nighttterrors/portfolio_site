@@ -61,17 +61,64 @@ class Review(models.Model):
 
 
 class DiscussionPost(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
 
     book = models.ForeignKey(
         Book,
         on_delete=models.CASCADE,
-        related_name='discussion_posts'
+        related_name="posts"
     )
 
     content = models.TextField()
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
-    def __str__(self):
-        return f"{self.user.username} - {self.book.title}"
+
+
+class Reply(models.Model):
+
+    post = models.ForeignKey(
+        DiscussionPost,
+        on_delete=models.CASCADE,
+        related_name="replies"
+    )
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    content = models.TextField()
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+
+class PostLike(models.Model):
+
+    post = models.ForeignKey(
+        DiscussionPost,
+        on_delete=models.CASCADE,
+        related_name="likes"
+    )
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        unique_together = (
+            'post',
+            'user'
+        )

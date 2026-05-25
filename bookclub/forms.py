@@ -1,5 +1,5 @@
 from django import forms
-from .models import Review, Profile, Book, DiscussionPost
+from .models import Review, Profile, Book, DiscussionPost, Reply
 from django.contrib.auth.models import User
 
 class ReviewForm(forms.ModelForm):
@@ -49,3 +49,15 @@ class DiscussionPostForm(forms.ModelForm):
     class Meta:
         model = DiscussionPost
         fields = ['content']
+
+
+
+class ReplyForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Reply
+
+        fields = [
+            'content'
+        ]

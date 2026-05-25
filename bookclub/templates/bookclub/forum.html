@@ -1,5 +1,97 @@
 {% load static %}
 
+
+
+
+
+
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="stylesheet" href="{% static 'bookclub/css/styles.css' %}"  type="text/css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+    <script src="{% static 'bookclub/js/scripts.js' %}" defer></script>
+</head>
+<body>
+{% if request.user.is_authenticated %}
+
+<div class="book-club-app">
+  <nav class="nav">  
+    <div class="nav-container">
+      <a href="{% url 'book_home'%}" class="nav-logo">
+        <img
+         src="{% static 'bookclub/images/book_club_logo.svg '%}"
+         alt="The Book Club Logo" 
+         class="nav-logo-image">
+         The Book Club
+      </a>
+<!-- 
+      {% if messages %}
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      {% endif %} -->
+
+      <button 
+        class="mobile-menu-btn"
+        onclick="toggleMobileMenu()">
+        <img
+          src="{% static 'bookclub/images/book-closed.svg' %}"
+          alt="Open Menu"
+          class="menu-icon closed-book"
+          id="closedBook"
+        >
+
+        <img
+          src="{% static 'bookclub/images/book-open.svg' %}"
+          alt="Close Menu"
+          class="menu-icon open-book"
+          id="openBook"
+        >
+      </button>
+      <ul class="nav-links" id="mobileMenu">
+
+        <li>
+          <a href="{% url 'timeline' %}">Timeline</a>
+        </li>
+        <li>
+          <a href="{% url 'members' %}">Meet the Members</a>
+        </li>
+
+        <li>
+          <a href="#book-of-the-month">Book of the Month</a>
+        </li>
+        <li>
+          <a href="#reviews">
+            Reviews
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'forum'%}">
+            Forum
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'edit_profile'%}">
+            Edit profile
+          </a>
+        </li>
+        <li>
+          <form action="{% url 'logout' %}" method="POST" class="btn-primary">
+            {% csrf_token %} 
+            <button type="submit" class="btn-text">Logout</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+{% endif %}
+</nav>
+                          
 <h1>{{ book.title }} Discussion Board</h1>
 
 <form method="POST">
@@ -13,47 +105,18 @@
 <hr>
 
 {% for post in posts %}
-
-    <div style="margin-bottom:20px; border:1px solid #ccc; padding:15px; border-radius:10px;">
-
-        <div style="display:flex; align-items:center; gap:10px;">
-
-            {% if post.user.profile.profile_picture %}
-                <img
-                    src="{{ post.user.profile.profile_picture.url }}"
-                    width="50"
-                    height="50"
-                    style="border-radius:50%; object-fit:cover;"
-                >
-            {% else %}
-                <img
-                    src="{% static 'bookclub/images/defaultusericon.svg' %}"
-                    width="50"
-                    height="50"
-                >
-            {% endif %}
-
-            <div>
-                <strong>
-                    {% if post.user.first_name %}
-                        {{ post.user.first_name }}
-                        {{ post.user.last_name }}
-                    {% else %}
-                        {{ post.user.username }}
-                    {% endif %}
-                </strong>
-
-                <br>
-
-                <small>{{ post.created_at }}</small>
-            </div>
-
-        </div>
-
-        <p style="margin-top:10px;">
-            {{ post.content }}
-        </p>
-
+    <div class="post-card">
+    
+        avatar
+    
+        username
+    
+        timestamp
+    
+        content
+    
+        actions
+    
     </div>
 
 {% empty %}
@@ -61,3 +124,7 @@
     <p>No discussion posts yet.</p>
 
 {% endfor %}
+</body>
+</html>
+
+

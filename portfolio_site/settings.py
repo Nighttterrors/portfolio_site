@@ -33,7 +33,7 @@ DEBUG = False
 
 
 ALLOWED_HOSTS = [
-    "diegos-corner.onrender.com", 
+    "diegos-corner.onrender.com", S
     '127.0.0.1',
     'diegogutierrez.tech',
     'www.diegogutierrez.tech',]
