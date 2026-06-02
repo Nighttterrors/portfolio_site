@@ -122,3 +122,10 @@ class PostLike(models.Model):
             'post',
             'user'
         )
+    @property
+    def like_count(self):
+        return self.likes.count()
+    
+    @property
+    def reply_count(self):
+        return self.replies.count()

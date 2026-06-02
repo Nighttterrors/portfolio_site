@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import Book, Profile, DiscussionPost
-from .forms import ReviewForm, UserUpdateForm, ProfileUpdateForm, BookForm, DiscussionPostForm
+from .models import Book, Profile, DiscussionPost, PostLike
+from .forms import ReviewForm, UserUpdateForm, ProfileUpdateForm, BookForm, DiscussionPostForm, ReplyForm
 from django.contrib.auth.decorators import user_passes_test
 from collections import defaultdict
 from django.contrib.auth import authenticate, login
@@ -224,28 +224,100 @@ def forum(request):
         )
         .order_by('-created_at')
     )
-
+    for post in posts:
+        post.user_has_liked = (
+            post.likes.filter(
+                user=request.user
+            ).exists()
+        )
+    form = DiscussionPostForm()
+    reply_form = ReplyForm()
     if request.method == 'POST':
-        form = DiscussionPostForm(request.POST)
+
+        # REPLY SUBMISSION
+        if 'reply_content' in request.POST:
+
+            post_id = request.POST.get(
+                'post_id'
+            )
+
+            parent_post = DiscussionPost.objects.get(
+                id=post_id
+            )
+
+            reply_form = ReplyForm({
+                'content':
+                    request.POST.get(
+                        'reply_content'
+                    )
+            })
+
+            if reply_form.is_valid():
+
+                reply = reply_form.save(
+                    commit=False
+                )
+
+                reply.user = request.user
+
+                reply.post = parent_post
+
+                reply.save()
+
+            return redirect('forum')
+
+
+        # NEW DISCUSSION POST
+        form = DiscussionPostForm(
+            request.POST
+        )
 
         if form.is_valid():
-            post = form.save(commit=False)
+
+            post = form.save(
+                commit=False
+            )
 
             post.user = request.user
+
             post.book = current_book
 
             post.save()
 
             return redirect('forum')
-
-    else:
-        form = DiscussionPostForm()
-
+    
     return render(request, 'bookclub/forum.html', {
+        'reply_form': reply_form,
         'book': current_book,
         'posts': posts,
         'form': form,
     })
+
+
+@login_required
+def toggle_like(request, post_id):
+    post = get_object_or_404(
+        DiscussionPost,
+        id= post_id
+    )
+
+
+    existing_like = PostLike.objects.filter(
+        post = post,
+        user = request.user
+    ).first()
+
+    if existing_like:
+        existing_like.delete()
+
+    else:
+        PostLike.objects.create(
+            post = post,
+            user = request.user
+        )
+    
+    return redirect('forum')
+
 
 
 

@@ -46,3 +46,16 @@ window.onload = function() {
 
     }
 }
+
+
+function toggleReplies(postId) {
+
+    const container =
+        document.getElementById(
+            `replies-${postId}`
+        );
+
+    container.classList.toggle(
+        "active"
+    );
+}

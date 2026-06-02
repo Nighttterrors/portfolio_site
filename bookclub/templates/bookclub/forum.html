@@ -91,39 +91,186 @@
     </div>
 {% endif %}
 </nav>
-                          
-<h1>{{ book.title }} Discussion Board</h1>
 
-<form method="POST">
-    {% csrf_token %}
+<section class="forum-hero">
 
-    {{ form.as_p }}
+    <h1>{{ book.title }} Discussion Board</h1>
 
-    <button type="submit">Post</button>
-</form>
+    <form
+        method="POST"
+        class="forum-composer"
+    >
+        {% csrf_token %}
 
+        {{ form.content }}
+
+        <button
+            type="submit"
+            class="btn-primary forum-submit"
+        >
+            Post
+        </button>
+
+    </form>
+
+    </section>
 <hr>
 
+<section class="forum-feed">
+
 {% for post in posts %}
-    <div class="post-card">
-    
-        avatar
-    
-        username
-    
-        timestamp
-    
-        content
-    
-        actions
-    
+
+<div class="post-card">
+
+    <div class="post-header">
+
+        <div class="post-user">
+
+            {% if post.user.profile.profile_picture %}
+
+                <img
+                    src="{{ post.user.profile.profile_picture.url }}"
+                    class="post-avatar"
+                    alt="profile picture"
+                >
+
+            {% else %}
+
+                <img
+                    src="{% static 'bookclub/images/defaultusericon.svg' %}"
+                    class="post-avatar"
+                    alt="default profile picture"
+                >
+
+            {% endif %}
+
+            <div>
+
+                <h3 class="post-username">
+                    {{ post.user.username }}
+                </h3>
+
+                <p class="post-time">
+                    {{ post.created_at }}
+                </p>
+
+            </div>
+
+        </div>
+
     </div>
+
+    <div class="post-content">
+
+        <p>
+            {{ post.content }}
+        </p>
+
+    </div>
+
+    <div class="post-actions">
+
+        <form
+            method="POST"
+            action="{% url 'toggle_like' post.id %}"
+            style="display:inline;"
+        >
+
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="post-action-btn"
+            >
+
+                {% if post.user_has_liked %}
+
+                    ❤️
+
+                {% else %}
+
+                    🤍
+
+                {% endif %}
+
+                {{ post.likes.count }}
+
+            </button>
+        
+        </form>
+
+        <button
+            class="post-action-btn"
+        data-post-id="{{ post.id }}"
+        onclick="toggleReplies(this.dataset.postId)">Reply
+        </button>
+
+    </div>
+
+    <div
+        class="replies-container"
+        id="replies-{{ post.id }}"
+    >
+
+        {% for reply in post.replies.all %}
+
+            <div class="reply-card">
+
+                <strong>
+                    {{ reply.user.username }}
+                </strong>
+
+                <p>
+                    {{ reply.content }}
+                </p>
+
+            </div>
+
+        {% empty %}
+
+            <p class="no-replies">
+                No replies yet.
+            </p>
+
+        {% endfor %}
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <input
+                type="hidden"
+                name="post_id"
+                value="{{ post.id }}"
+            >
+
+            <textarea
+                name="reply_content"
+                class="reply-input"
+                placeholder="Write a reply..."
+            ></textarea>
+
+            <button
+                type="submit"
+                class="btn-primary"
+            >
+                Reply
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
 
 {% empty %}
 
-    <p>No discussion posts yet.</p>
+<p>
+    No discussion posts yet.
+</p>
 
 {% endfor %}
+</section>
 </body>
 </html>
 

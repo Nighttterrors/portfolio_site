@@ -49,6 +49,16 @@ class DiscussionPostForm(forms.ModelForm):
     class Meta:
         model = DiscussionPost
         fields = ['content']
+    
+        widgets = {
+            'content' : forms.Textarea(
+                attrs={
+                    'placeholder' : 'Share your thoughts...',
+                    'rows': 4,
+                    'class': 'forum-textarea'
+                }
+            )
+        }
 
 
 
