@@ -48,7 +48,9 @@
         >
       </button>
       <ul class="nav-links" id="mobileMenu">
-
+        <li>
+          <a href="{% url 'book_home' %}">Home</a>
+        </li>
         <li>
           <a href="{% url 'timeline' %}">Timeline</a>
         </li>
@@ -56,14 +58,6 @@
           <a href="{% url 'members' %}">Meet the Members</a>
         </li>
 
-        <li>
-          <a href="#book-of-the-month">Book of the Month</a>
-        </li>
-        <li>
-          <a href="#reviews">
-            Reviews
-          </a>
-        </li>
         <li>
           <a href="{% url 'forum'%}">
             Forum

@@ -1,55 +1,175 @@
 {% load static %}
 
-<h1>Meet the Members</h1>
 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet The Members</title>
+    <link rel="stylesheet" href="{% static 'bookclub/css/styles.css' %}"  type="text/css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+    <script src="{% static 'bookclub/js/scripts.js' %}" defer></script>
+</head>
+<body>
+    
+{% if request.user.is_authenticated %}
 
-<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+<div class="book-club-app">
+  <nav class="nav">  
+    <div class="nav-container">
+      <a href="{% url 'book_home'%}" class="nav-logo">
+        <img
+         src="{% static 'bookclub/images/book_club_logo.svg '%}"
+         alt="The Book Club Logo" 
+         class="nav-logo-image">
+         The Book Club
+      </a>
+<!-- 
+      {% if messages %}
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      {% endif %} -->
 
-    {% for member in members %}
+      <button 
+        class="mobile-menu-btn"
+        onclick="toggleMobileMenu()">
+        <img
+          src="{% static 'bookclub/images/book-closed.svg' %}"
+          alt="Open Menu"
+          class="menu-icon closed-book"
+          id="closedBook"
+        >
 
-        <div style="width: 22opx; border: 1px solid #ccc; padding: 15px; border-radius: 10px; text-align: center;">
-            {% if member.profile_picture %}
-                <img
-                    src="{{ member.profile_picture.url }}"
-                    width="120"
-                    height="120"
-                    style="border-radius: 50%; object-fit: cover;" 
-                    alt="Profile pic"
-                >
-            {% else %}
-                <img
-                    src="{% static 'bookclub/images/defaultusericon.svg' %}"
-                    width="120"
-                    height="120"
-                    style="border-radius:50%;"
-                    alt="defualt profile pic"
-                >
-            {% endif %}
-            <h3>
-                {% if member.user.first_name or member.user.last_name %}
-                    {{ member.user.first_name }} {{ member.user.last_name }}
+        <img
+          src="{% static 'bookclub/images/book-open.svg' %}"
+          alt="Close Menu"
+          class="menu-icon open-book"
+          id="openBook"
+        >
+      </button>
+      <ul class="nav-links" id="mobileMenu">
+        <li>
+          <a href="{% url 'book_home'%}">
+            Home
+          </a>
+        </li>
+
+        <li>
+          <a href="{% url 'timeline' %}">Timeline</a>
+        </li>
+
+        <li>
+          <a href="{% url 'forum' %}">Forum</a>
+        </li>
+
+        <li>
+          <a href="{% url 'edit_profile'%}">
+            Edit profile
+          </a>
+        </li>
+        <li>
+          <form action="{% url 'logout' %}" method="POST" class="btn-primary">
+            {% csrf_token %} 
+            <button type="submit" class="btn-text">Logout</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+{% endif %}
+</nav>
+
+<section class="members-page">
+
+    <div class="members-header">
+
+        <p class="landing-subtitle">
+            Our Community
+        </p>
+
+        <h1 class="landing-title">
+            Meet the Members
+        </h1>
+
+        <p class="landing-description">
+            Readers, reviewers, and discussion partners who make
+            The Reading Circle special.
+        </p>
+
+    </div>
+
+    <div class="members-grid">
+
+        {% for member in members %}
+
+            <div class="member-card">
+
+                {% if member.profile_picture %}
+
+                    <img
+                        src="{{ member.profile_picture.url }}"
+                        class="member-avatar"
+                        alt="Profile pic"
+                    >
+
                 {% else %}
-                    {{ member.user.username }}
+
+                    <img
+                        src="{% static 'bookclub/images/defaultusericon.svg' %}"
+                        class="member-avatar"
+                        alt="Default profile pic"
+                    >
+
                 {% endif %}
-            </h3>
 
-            <p>@{{ member.user.username }}</p>
+                <h3 class="member-name">
 
-            {% if member.bio %}
-                <p>{{ member.bio }}</p>
-            {% else %}
-                <p>No bio yet.</p>
-            {% endif %}
+                    {% if member.user.first_name or member.user.last_name %}
 
-        </div>
+                        {{ member.user.first_name }}
+                        {{ member.user.last_name }}
 
-    {% empty %}
+                    {% else %}
 
-        <p>No members yet.</p>
+                        {{ member.user.username }}
 
-    {% endfor %}
- 
-        </div>
+                    {% endif %}
+
+                </h3>
+
+                <p class="member-username">
+                    @{{ member.user.username }}
+                </p>
+
+                {% if member.bio %}
+
+                    <p class="member-bio">
+                        {{ member.bio }}
+                    </p>
+
+                {% else %}
+
+                    <p class="member-bio">
+                        Still writing their story...
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        {% empty %}
+
+            <p class="member-empty">
+                No members yet.
+            </p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
 
 
-</div>
+</body>
+</html>
