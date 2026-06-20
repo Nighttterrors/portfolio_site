@@ -1,0 +1,158 @@
+{% extends 'bookclub/base.html' %}
+
+{% block content %}
+
+<section class="archive-page">
+
+    <div class="archive-header">
+
+        <img
+            src="{{ book.cover.url }}"
+            class="archive-cover"
+        >
+
+        <div>
+
+            <p class="landing-subtitle">
+                {{ book.month|date:"F Y" }}
+            </p>
+
+            <h1 class="landing-title">
+
+                {{ book.title }}
+
+            </h1>
+
+            <p class="book-author">
+
+                {{ book.author }}
+
+            </p>
+
+            <p class="book-rating">
+
+                ⭐ {{ book.average_rating|default:"No ratings yet" }}
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <section class="archive-section">
+
+        <h2 class="archive-section-title">
+
+            Reviews
+
+        </h2>
+
+        {% for review in reviews %}
+
+        <div class="archive-card">
+
+            <h3>
+
+                {{ review.user.username }}
+
+            </h3>
+
+            <p>
+
+                ⭐ {{ review.rating }}
+
+            </p>
+
+            <p>
+
+                {{ review.content }}
+
+            </p>
+
+        </div>
+
+        {% empty %}
+
+        <p>
+
+            No reviews yet.
+
+        </p>
+
+        {% endfor %}
+
+    </section>
+
+
+    <section class="archive-section">
+
+        <h2 class="archive-section-title">
+
+            Discussion Archive
+
+        </h2>
+
+        {% for post in posts %}
+
+        <div class="archive-card">
+
+            <h3>
+
+                {{ post.user.username }}
+
+            </h3>
+
+            <p>
+
+                {{ post.content }}
+
+            </p>
+
+            <p>
+
+                ❤️ {{ post.likes.count }}
+
+                ·
+
+                💬 {{ post.replies.count }}
+
+            </p>
+
+            {% for reply in post.replies.all %}
+
+            <div class="reply-card">
+
+                <strong>
+
+                    {{ reply.user.username }}
+
+                </strong>
+
+                <p>
+
+                    {{ reply.content }}
+
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% empty %}
+
+        <p>
+
+            No discussion posts.
+
+        </p>
+
+        {% endfor %}
+
+    </section>
+
+</section>
+
+{% endblock %}

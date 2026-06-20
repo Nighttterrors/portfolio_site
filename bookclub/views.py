@@ -5,7 +5,7 @@ from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Book, Profile, DiscussionPost, PostLike
-from .forms import ReviewForm, UserUpdateForm, ProfileUpdateForm, BookForm, DiscussionPostForm, ReplyForm
+from .forms import ReviewForm, UserUpdateForm, ProfileUpdateForm, BookForm, DiscussionPostForm, ReplyForm, DiscussionPost, Book, Review
 from django.contrib.auth.decorators import user_passes_test
 from collections import defaultdict
 from django.contrib.auth import authenticate, login
@@ -351,3 +351,41 @@ def custom_login(request):
             return redirect('/books/?login=1')
 
     return redirect('landing_page')
+
+
+@login_required
+def book_archive(request, book_id):
+
+    book = get_object_or_404(
+        Book,
+        id=book_id
+    )
+
+    reviews = (
+        Review.objects
+        .filter(book=book)
+        .select_related('user')
+        .order_by('-created_at')
+    )
+
+    posts = (
+        DiscussionPost.objects
+        .filter(book=book)
+        .select_related('user')
+        .prefetch_related(
+            'likes',
+            'replies',
+            'replies__user'
+        )
+        .order_by('-created_at')
+    )
+
+    return render(
+        request,
+        'bookclub/book_archive.html',
+        {
+            'book': book,
+            'reviews': reviews,
+            'posts': posts,
+        }
+    )

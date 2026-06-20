@@ -1,43 +1,143 @@
-<h1>Book Timeline</h1>
+{% load static %}
 
-{% for year, books in grouped_books.items %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Timeline</title>
+    <link
+      rel="stylesheet"
+      href="{% static 'bookclub/css/styles.css' %}"
+      type="text/css"
+    />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" />
+    <script src="{% static 'bookclub/js/scripts.js' %}" defer></script>
+  </head>
 
-    <h2>{{ year }}</h2>
+  <body>
+    {% if request.user.is_authenticated %}
 
-    <div style="margin-bottom: 40px;">
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="{% url 'book_home'%}" class="nav-logo">
+          <img
+            src="{% static 'bookclub/images/book_club_logo.svg '%}"
+            alt="The Book Club Logo"
+            class="nav-logo-image"
+          />
+          The Book Club
+        </a>
+        <!-- 
+      {% if messages %}
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      {% endif %} -->
 
-        {% for book in books %}
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+          <img
+            src="{% static 'bookclub/images/book-closed.svg' %}"
+            alt="Open Menu"
+            class="menu-icon closed-book"
+            id="closedBook"
+          />
 
-            <div style="border:1px solid #ccc; padding:15px; margin-bottom:15px; border-radius:10px;">
+          <img
+            src="{% static 'bookclub/images/book-open.svg' %}"
+            alt="Close Menu"
+            class="menu-icon open-book"
+            id="openBook"
+          />
+        </button>
+        <ul class="nav-links" id="mobileMenu">
+          <li>
+            <a href="{% url 'book_home' %}">Home</a>
+          </li>
+          <li>
+            <a href="{% url 'timeline' %}">Timeline</a>
+          </li>
+          <li>
+            <a href="{% url 'members' %}">Meet the Members</a>
+          </li>
 
-                <h3>{{ book.title }}</h3>
+          <li>
+            <a href="{% url 'forum'%}"> Forum </a>
+          </li>
+          <li>
+            <form action="{% url 'logout' %}" method="POST" class="btn-primary">
+              {% csrf_token %}
+              <button type="submit" class="btn-text">Logout</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-                <p><strong>Author:</strong> {{ book.author }}</p>
+    {% for year, books in grouped_books.items %}
 
-                <p><strong>Month:</strong> {{ book.month }}</p>
+    <h2 class="timeline-year">{{ year }}</h2>
 
-                {% if book.is_current %}
-                    <p>📖 Current Book</p>
+    {% for book in books %}
+
+        <div class="timeline-item">
+
+            <div class="timeline-marker">
+
+                <div class="timeline-dot"></div>
+
+                {% if not forloop.last %}
+                    <div class="timeline-line"></div>
                 {% endif %}
-
-                {% if book.cover %}
-                    <img src="{{ book.cover.url }}" width="120">
-                {% endif %}
-
-                <p>{{ book.description }}</p>
-
-                <p>
-                    ⭐ {{ book.average_rating|default:"No ratings yet" }}
-                </p>
 
             </div>
 
-        {% endfor %}
+            <div class="book-card">
+                <img src="{{ book.cover.url }}" alt="{{ book.title }}" class="book-cover">
 
-    </div>
+                <p class="book-label">
+                    {% if book.is_current %}
+                        Current pick
+                    {% else %}
+                        {{ book.month }}
+                    {% endif %}
+                </p> 
 
-{% empty %}
 
-    <p>No books yet.</p>
+                <h2 class="book-title">
+                    {{ book.title }}
+                </h2>
 
-{% endfor %}
+                <p class="book-author">
+                    {{ book.author }}
+                </p>
+
+                <p class="book-rating">
+                    ⭐ {{ book.average_rating | default:"No ratings"}}
+                </p>
+
+                <p class="book-rating">
+
+                    {{ book.reviews.count }}
+
+                </p>
+
+                <p class="book-rating">
+
+                    {{ book.discussion_posts.count }} Posts
+
+                </p>
+                <a
+                    href="{% url 'book_archive' book.id %}"
+                    class="btn-primary"
+                >
+                    View Archive
+                </a>
+
+            </div>
+        </div>
+
+
+    {% endfor %} {% endfor %} {% endif %}
+  </body>
+</html>

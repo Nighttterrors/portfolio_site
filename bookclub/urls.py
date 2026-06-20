@@ -18,6 +18,8 @@ urlpatterns = [
     path('delete-member/<int:user_id>/', views.delete_member, name='delete_member'),
     path('forum/', views.forum, name='forum'),
     path('login/', views.custom_login, name='custom_login'),
-    path('post/<int:post_id>/like/', views.toggle_like, name='toggle_like')
+    path('<int:book_id>/archive/', views.book_archive, name='book_archive')
+
+    
     # path('login/', auth_views.LoginView.as_view(template_name='bookclub/login.html'), name='login'),
 ]
