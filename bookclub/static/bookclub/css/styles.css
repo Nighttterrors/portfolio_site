@@ -1010,6 +1010,49 @@ img.member-image {
 }
 
 
+.admin-dashboard-body{
+  margin: 5rem auto;
+
+}
+
+.admin-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(350px, 1fr));
+
+    gap: 2rem;
+
+    margin-bottom: 4rem;
+}
+
+
+.admin-member-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 1rem 0;
+
+    border-bottom:
+        1px solid rgba(0,0,0,.08);
+}
+
+
+.admin-member-row:last-child {
+
+    border-bottom: none;
+}
+
+
+.admin-members-section {
+
+    margin-top: 4rem;
+}
 
 
 

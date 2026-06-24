@@ -44,12 +44,24 @@ def approval_dashboard(request):
     else:
         book_form = BookForm()
 
+    member_count = Profile.objects.filter(
+        isApproved = True
+    ).count()
+
+    book_count = Book.objects.count()
+    review_count = Review.objects.count()
+    discussion_count = DiscussionPost.objects.count()
+
 
 
     return render(request, "bookclub/approval_dashboard.html", {
         "pending_users": pending_users,
         'approved_users': approved_users,
         'book_form' : book_form,
+        'member_count': member_count,
+        'book_count': book_count,
+        'review_count': review_count,
+        'discussion_count': discussion_count,
     })
 
 @user_passes_test(is_admin)

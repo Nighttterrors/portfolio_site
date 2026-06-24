@@ -1,53 +1,268 @@
-<h1>Pending Members</h1>
+{% load static %}
+<html lang="en">
 
-{% for profile in pending_users %}
-  <div>
-    <p>{{ profile.user.username }}</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Timeline</title>
+  <link rel="stylesheet" href="{% static 'bookclub/css/styles.css' %}" type="text/css" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" href="{% static 'images/favicon.ico' %}" />
+  <script src="{% static 'bookclub/js/scripts.js' %}" defer></script>
+</head>
 
-    <form method="POST" action="{% url 'approve_user' profile.user.id %}">
-      {% csrf_token %}
-      <button type="submit">Approve</button>
-    </form>
-  </div>
-{% empty %}
-  <p>No pending users</p>
-{% endfor %}
+<div class="admin-stats-grid">
 
+    <div class="admin-stat-card">
 
-{% for profile in approved_users %}
+        <h2>{{ member_count }}</h2>
 
-<div style="margin-bottom:20px; border:1px solid #ccc; padding:10px;">
+        <p>Members</p>
 
-    {% if profile.profile_picture %}
-        <img src="{{ profile.profile_picture.url }}" width="60">
-    {% endif %}
+    </div>
 
-    <p>
-        {{ profile.user.first_name }}
-        {{ profile.user.last_name }}
-        (@{{ profile.user.username }})
-    </p>
+    <div class="admin-stat-card">
 
-    <p>{{ profile.user.email }}</p>
+        <h2>{{ book_count }}</h2>
 
-    <form method="POST" action="{% url 'delete_member' profile.user.id %}">
-        {% csrf_token %}
-        <button type="submit">Delete Member</button>
-    </form>
+        <p>Books Read</p>
+
+    </div>
+
+    <div class="admin-stat-card">
+
+        <h2>{{ review_count }}</h2>
+
+        <p>Reviews</p>
+
+    </div>
+
+    <div class="admin-stat-card">
+
+        <h2>{{ discussion_count }}</h2>
+
+        <p>Posts</p>
+
+    </div>
 
 </div>
 
-{% empty %}
-<p>No approved users.</p>
-{% endfor %}
+<body>
+  {% if request.user.is_authenticated %}
+
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="{% url 'book_home'%}" class="nav-logo">
+        <img src="{% static 'bookclub/images/book_club_logo.svg '%}" alt="The Book Club Logo" class="nav-logo-image" />
+        The Book Club
+      </a>
+
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <img src="{% static 'bookclub/images/book-closed.svg' %}" alt="Open Menu" class="menu-icon closed-book"
+          id="closedBook" />
+
+        <img src="{% static 'bookclub/images/book-open.svg' %}" alt="Close Menu" class="menu-icon open-book"
+          id="openBook" />
+      </button>
+      <ul class="nav-links" id="mobileMenu">
+        <li>
+          <a href="{% url 'book_home' %}">Home</a>
+        </li>
+        <li>
+          <a href="{% url 'timeline' %}">Timeline</a>
+        </li>
+        <li>
+          <a href="{% url 'members' %}">Meet the Members</a>
+        </li>
+
+        <li>
+          <a href="{% url 'forum'%}"> Forum </a>
+        </li>
+        <li>
+          <form action="{% url 'logout' %}" method="POST" class="btn-primary">
+            {% csrf_token %}
+            <button type="submit" class="btn-text">Logout</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="admin-dashboard-body">
+
+<section class="admin-dashboard-body">
+
+    <div class="members-header">
+
+        <p class="landing-subtitle">
+            Administration
+        </p>
+
+        <h1 class="landing-title">
+            Club Dashboard
+        </h1>
+
+        <p class="landing-description">
+            Manage members, books, and community activity.
+        </p>
+
+    </div>
+
+    <div class="admin-grid">
+
+        <!-- Pending Members -->
+
+        <div class="modal-card">
+
+            <h2 class="modal-title">
+                Pending Members
+            </h2>
+
+            {% for profile in pending_users %}
+
+            <div class="admin-member-row">
+
+                <span>
+
+                    {{ profile.user.username }}
+
+                </span>
+
+                <form
+                    method="POST"
+                    action="{% url 'approve_user' profile.user.id %}"
+                >
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="btn-primary"
+                    >
+                        Approve
+                    </button>
+
+                </form>
+
+            </div>
+
+            {% empty %}
+
+            <p class="modal-subtitle">
+
+                No pending users.
+
+            </p>
+
+            {% endfor %}
+
+        </div>
 
 
-<h2>Add New Book</h2>
+        <!-- Add Book -->
 
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
+        <div class="modal-card">
 
-    {{ book_form.as_p }}
+            <h2 class="modal-title">
+                Add New Book
+            </h2>
 
-    <button type="submit">Add Book</button>
-</form>
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+                class="modal-form"
+            >
+
+                {% csrf_token %}
+
+                {{ book_form.as_p }}
+
+                <button
+                    type="submit"
+                    class="btn-primary modal-submit"
+                >
+                    Add Book
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <div class="admin-members-section">
+
+        <h2 class="modal-title">
+            Active Members
+        </h2>
+
+        <div class="members-grid">
+
+            {% for profile in approved_users %}
+
+            <div class="member-card">
+
+                {% if profile.profile_picture %}
+
+                <img
+                    src="{{ profile.profile_picture.url }}"
+                    class="member-image"
+                >
+
+                {% else %}
+
+                <img
+                    src="{% static 'bookclub/images/defaultusericon.svg' %}"
+                    class="member-image"
+                >
+
+                {% endif %}
+
+                <h3>
+
+                    {{ profile.user.first_name }}
+                    {{ profile.user.last_name }}
+
+                </h3>
+
+                <p>
+
+                    @{{ profile.user.username }}
+
+                </p>
+
+                <p>
+
+                    {{ profile.user.email }}
+
+                </p>
+
+                <form
+                    method="POST"
+                    action="{% url 'delete_member' profile.user.id %}"
+                >
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="btn-primary"
+                    >
+                        Remove
+                    </button>
+
+                </form>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+</body>
+{% endif %}
+</html>

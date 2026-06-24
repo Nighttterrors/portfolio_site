@@ -39,7 +39,7 @@ ALLOWED_HOSTS = [
     'www.diegogutierrez.tech',]
 
 
-CSRF_TRUSTED_ORIGINS = ["https://diegos-corner.onrender.com"]
+CSRF_TRUSTED_ORIGINS = ["https://diegos-corner.onrender.com", "https://www.diegogutierrez.tech"]
 
 # Application definition
 
