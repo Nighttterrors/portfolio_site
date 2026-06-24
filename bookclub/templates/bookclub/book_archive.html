@@ -1,0 +1,330 @@
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Timeline</title>
+    <link rel="stylesheet" href="{% static 'bookclub/css/styles.css' %}" type="text/css" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" />
+    <script src="{% static 'bookclub/js/scripts.js' %}" defer></script>
+</head>
+
+<body>
+    {% if request.user.is_authenticated %}
+
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="{% url 'book_home'%}" class="nav-logo">
+                <img src="{% static 'bookclub/images/book_club_logo.svg '%}" alt="The Book Club Logo"
+                    class="nav-logo-image" />
+                The Book Club
+            </a>
+            <!-- 
+      {% if messages %}
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      {% endif %} -->
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <img src="{% static 'bookclub/images/book-closed.svg' %}" alt="Open Menu" class="menu-icon closed-book"
+                    id="closedBook" />
+
+                <img src="{% static 'bookclub/images/book-open.svg' %}" alt="Close Menu" class="menu-icon open-book"
+                    id="openBook" />
+            </button>
+            <ul class="nav-links" id="mobileMenu">
+                <li>
+                    <a href="{% url 'book_home' %}">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'timeline' %}">Timeline</a>
+                </li>
+                <li>
+                    <a href="{% url 'members' %}">Meet the Members</a>
+                </li>
+
+                <li>
+                    <a href="{% url 'forum'%}"> Forum </a>
+                </li>
+                <li>
+                    <form action="{% url 'logout' %}" method="POST" class="btn-primary">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-text">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <section class="archive-body">
+    <div class="archive-header">
+
+        <img src="{{ book.cover.url }}" class="archive-cover" alt="{{ book.title }}">
+
+        <div class="archive-info">
+
+            <p class="landing-subtitle">
+
+                {{ book.month|date:"F Y" }}
+
+            </p>
+
+            <h1 class="landing-title">
+
+                {{ book.title }}
+
+            </h1>
+
+            <p class="book-author">
+
+                by {{ book.author }}
+
+            </p>
+
+            <p class="landing-description">
+
+                {{ book.description }}
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="archive-stats">
+
+        <div class="archive-stat-card">
+
+            <h2>
+
+                ⭐
+
+            </h2>
+
+            <h3>
+
+                {{ book.average_rating|default:"0" }}
+
+            </h3>
+
+            <p>
+
+                Average Rating
+
+            </p>
+
+        </div>
+
+        <div class="archive-stat-card">
+
+            <h2>
+
+                📝
+
+            </h2>
+
+            <h3>
+
+                {{ reviews.count }}
+
+            </h3>
+
+            <p>
+
+                Reviews
+
+            </p>
+
+        </div>
+
+        <div class="archive-stat-card">
+
+            <h2>
+
+                💬
+
+            </h2>
+
+            <h3>
+
+                {{ posts.count }}
+
+            </h3>
+
+            <p>
+
+                Discussion Posts
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <section class="archive-section">
+
+        <h2 class="archive-section-title">
+
+            Reviews
+
+        </h2>
+
+        {% for review in reviews %}
+
+        <div class="archive-card">
+
+            <div class="member-card-header">
+
+                {% if review.user.profile.profile_picture %}
+
+                <img src="{{ review.user.profile.profile_picture.url }}"
+                    style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+
+                {% else %}
+
+                <img src="{% static 'bookclub/images/defaultusericon.svg' %}"
+                    style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+
+                {% endif %}
+
+                <div>
+
+                    <h3>
+
+                        {{ review.user.username }}
+
+                    </h3>
+
+                    <p>
+
+                        ⭐ {{ review.rating }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <p>
+
+                {{ review.content }}
+
+            </p>
+
+        </div>
+
+        {% empty %}
+
+        <div class="archive-card">
+
+            No reviews yet.
+
+        </div>
+
+        {% endfor %}
+
+    </section>
+
+
+
+    <section class="archive-section">
+
+        <h2 class="archive-section-title">
+
+            Discussion Archive
+
+        </h2>
+
+        {% for post in posts %}
+
+        <div class="archive-card">
+
+            <div class="member-card-header">
+
+                {% if post.user.profile.profile_picture %}
+
+                <img src="{{ post.user.profile.profile_picture.url }}" class="member-image">
+
+                {% else %}
+
+                <img src="{% static 'bookclub/images/defaultusericon.svg' %}" class="member-image">
+
+                {% endif %}
+
+                <div>
+
+                    <h3>
+
+                        {{ post.user.username }}
+
+                    </h3>
+
+                    <p class="book-rating">
+
+                        ❤️ {{ post.likes.count }}
+
+                        ·
+
+                        💬 {{ post.replies.count }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <p>
+
+                {{ post.content }}
+
+            </p>
+
+            {% for reply in post.replies.all %}
+
+            <div class="reply-card">
+
+                <strong>
+
+                    {{ reply.user.username }}
+
+                </strong>
+
+                <p>
+
+                    {{ reply.content }}
+
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% empty %}
+
+        <div class="archive-card">
+
+            No discussion posts yet.
+
+        </div>
+
+        {% endfor %}
+
+    </section>
+    </section>
+
+</section>
+</body>
+{% endif %}
+
+</html>

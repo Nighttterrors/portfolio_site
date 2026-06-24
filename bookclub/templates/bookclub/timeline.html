@@ -74,6 +74,8 @@
       </div>
     </nav>
 
+    <section class="timeline-body">
+
     {% for year, books in grouped_books.items %}
 
     <h2 class="timeline-year">{{ year }}</h2>
@@ -139,5 +141,7 @@
 
 
     {% endfor %} {% endfor %} {% endif %}
+
+    </section>
   </body>
 </html>
