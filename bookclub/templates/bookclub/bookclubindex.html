@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>BookBound</title>
   <link rel="stylesheet" href="{% static 'bookclub/css/styles.css' %}" type="text/css">
   <link rel="icon" href="/favicon.ico">
   <link rel="icon" href="{% static 'images/favicon.ico' %}">
@@ -22,7 +22,7 @@
          src="{% static 'bookclub/images/book_club_logo.svg '%}"
          alt="The Book Club Logo" 
          class="nav-logo-image">
-         The Book Club
+         BookBound
       </a>
 <!-- 
       {% if messages %}
@@ -87,70 +87,238 @@
 </nav>
 
 
-<section class="hero">
-  <div class="hero-content">
-    <h1 class="hero-title fade-in">Welcome to The Reading Circle</h1>
-    <p class="hero-subtitle fade-in">
-      A community of women who love to read, discuss, and connect
-    </p>
-    <p class="hero-description fade-in">
-      We explore compelling stories,
-      share thoughtful reviews, and build lasting friendships through our
-      love of literature.
-    </p>
-  </div>
+<section class="home-hero">
+
+    <div class="home-hero-content">
+
+        <p class="landing-subtitle">
+            Welcome Back to
+        </p>
+
+        <h1 class="landing-title">
+            BookBound
+        </h1>
+
+        <p class="landing-description">
+            Continue the conversation,
+            share your thoughts,
+            and discover this month's story.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<section 
+    class="current-book-section"
+    id="book-of-the-month"
+>
+
+    {% if book %}
+
+    <div class="book-showcase">
+
+        <div class="book-3d-container">
+
+            <img
+                src="{{ book.cover.url }}"
+                class="book-3d-cover"
+                alt="{{ book.title }}"
+            >
+
+        </div>
+
+
+        <div class="book-info">
+
+            <p class="landing-subtitle">
+                Book of the Month
+            </p>
+
+
+            <h1 class="modal-title">
+
+                {{ book.title }}
+
+            </h1>
+
+
+            <p class="book-author">
+
+                by {{ book.author }}
+
+            </p>
+
+
+            <p class="landing-description">
+
+                {{ book.description }}
+
+            </p>
+
+
+            <p class="book-rating">
+
+                ⭐ {{ book.average_rating|default:"No ratings yet" }}
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+
+
+<section class="review-section">
+
+    <div class="modal-card">
+
+        <h2 class="modal-title">
+            Share Your Thoughts
+        </h2>
+
+
+        {% if existingReview %}
+
+            <p class="modal-subtitle">
+
+                You already reviewed this book ❤️
+
+            </p>
+
+
+        {% else %}
+
+
+        <form 
+            method="POST"
+            class="modal-form"
+        >
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+
+            <button
+                class="btn-primary modal-submit"
+                type="submit"
+            >
+
+                Submit Review
+
+            </button>
+
+
+        </form>
+
+        {% endif %}
+
+    </div>
+
 </section>
 
 
 
 
 
-<h1>Book of the Month</h1>
+<section 
+    class="reviews-section"
+    id="reviews"
+>
 
-{% if book %}
-<img src="{{ book.cover.url }}" alt="{{ book.title }}" style="width: 150px; height: auto;">
-  <h2>{{ book.title }}</h2>
-  <p>by {{ book.author }}</p>
+<h1 class="modal-title">
 
-  <p>{{ book.description }}</p>
+    Member Reviews
 
-  <p>
-    ⭐ {{ book.average_rating|default:"No ratings yet" }}
-  </p>
-{% else %}
-  <p>No book selected yet.</p>
-  {% endif %}
+</h1>
 
-<h3>Add Your Review</h3>
-{% if existingReview %}
-  <p>You Already Reviewed this book.</p>
-{% else %}
-    <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit Review</button>
-    </form>
-{% endif %}
-  <h2>Member Reviews</h2>
+
+<div class="reviews-grid">
+
 
 {% for review in reviews %}
-  <div id="reviews">
-    {% if review.user.profile.profile_picture %}
-      <img src="{{ review.user.profile.profile_picture.url }}" width="40" height="40" style="border-radius:50%;" alt="{{ review.user.username }}'s profile picture">
-    {% else %}
-      <img src="{% static 'bookclub/images/defaultusericon.svg' %}" width="40" alt="Default user icon">
-    {% endif %}
-    <strong>{{ review.user.username }}</strong> 
 
-    <p>Rating: {{ review.rating }}/5</p>
-    <p>{{ review.content }}</p>
-    <small>{{ review.created_at }}</small>
-  </div>
-{% empty %}
-  <p>No reviews yet.</p>
-{% endfor %}
-  
+
+<div class="review-card">
+
+
+    <div class="review-user">
+
+
+        {% if review.user.profile.profile_picture %}
+
+        <img
+            src="{{ review.user.profile.profile_picture.url }}"
+            class="member-image"
+        >
+
+        {% else %}
+
+
+        <img
+            src="{% static 'bookclub/images/defaultusericon.svg' %}"
+            class="member-image"
+        >
+
+        {% endif %}
+
+
+
+        <strong>
+
+            {{ review.user.username }}
+
+        </strong>
+
+
+    </div>
+
+
+
+    <p>
+
+        ⭐ {{ review.rating }}/5
+
+    </p>
+
+
+
+    <p>
+
+        {{ review.content }}
+
+    </p>
+
+
+
+    <small>
+
+        {{ review.created_at }}
+
+    </small>
+
+
 </div>
+
+
+{% empty %}
+
+<p>No reviews yet.</p>
+
+{% endfor %}
+
+</div>
+
+
+</section>
 
   
 </body>
