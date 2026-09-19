@@ -188,9 +188,9 @@ body {
   padding: 2rem;
   border-radius: 24px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-
+  width: max-content;
   max-width: 340px;
-  text-align: center;
+
 }
 
 .book-cover {
@@ -775,10 +775,15 @@ body {
 
 .timeline-body{
   margin: 7rem auto auto 5rem;
+  display: flex;
+  overflow: scroll;
+  column-gap: 5rem;
 }
 
 .timeline-year{
-  margin: auto auto 2rem 5rem;
+  margin: auto;
+  padding: 5rem;
+
 }
 .timeline-page {
 

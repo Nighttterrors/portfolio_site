@@ -1,80 +1,65 @@
 {% load static %}
 
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Book Timeline</title>
-    <link
-      rel="stylesheet"
-      href="{% static 'bookclub/css/styles.css' %}"
-      type="text/css"
-    />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="icon" href="{% static 'images/favicon.ico' %}" />
-    <script src="{% static 'bookclub/js/scripts.js' %}" defer></script>
-  </head>
 
-  <body>
-    {% if request.user.is_authenticated %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Timeline</title>
+  <link rel="stylesheet" href="{% static 'bookclub/css/styles.css' %}" type="text/css" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" href="{% static 'images/favicon.ico' %}" />
+  <script src="{% static 'bookclub/js/scripts.js' %}" defer></script>
+</head>
 
-    <nav class="nav">
-      <div class="nav-container">
-        <a href="{% url 'book_home'%}" class="nav-logo">
-          <img
-            src="{% static 'bookclub/images/book_club_logo.svg '%}"
-            alt="The Book Club Logo"
-            class="nav-logo-image"
-          />
-          The Book Club
-        </a>
-        <!-- 
+<body>
+  {% if request.user.is_authenticated %}
+
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="{% url 'book_home'%}" class="nav-logo">
+        <img src="{% static 'bookclub/images/book_club_logo.svg '%}" alt="The Book Club Logo" class="nav-logo-image" />
+        The Book Club
+      </a>
+      <!-- 
       {% if messages %}
         {% for message in messages %}
           <p>{{ message }}</p>
         {% endfor %}
       {% endif %} -->
 
-        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-          <img
-            src="{% static 'bookclub/images/book-closed.svg' %}"
-            alt="Open Menu"
-            class="menu-icon closed-book"
-            id="closedBook"
-          />
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <img src="{% static 'bookclub/images/book-closed.svg' %}" alt="Open Menu" class="menu-icon closed-book"
+          id="closedBook" />
 
-          <img
-            src="{% static 'bookclub/images/book-open.svg' %}"
-            alt="Close Menu"
-            class="menu-icon open-book"
-            id="openBook"
-          />
-        </button>
-        <ul class="nav-links" id="mobileMenu">
-          <li>
-            <a href="{% url 'book_home' %}">Home</a>
-          </li>
-          <li>
-            <a href="{% url 'timeline' %}">Timeline</a>
-          </li>
-          <li>
-            <a href="{% url 'members' %}">Meet the Members</a>
-          </li>
+        <img src="{% static 'bookclub/images/book-open.svg' %}" alt="Close Menu" class="menu-icon open-book"
+          id="openBook" />
+      </button>
+      <ul class="nav-links" id="mobileMenu">
+        <li>
+          <a href="{% url 'book_home' %}">Home</a>
+        </li>
+        <li>
+          <a href="{% url 'timeline' %}">Timeline</a>
+        </li>
+        <li>
+          <a href="{% url 'members' %}">Meet the Members</a>
+        </li>
 
-          <li>
-            <a href="{% url 'forum'%}"> Forum </a>
-          </li>
-          <li>
-            <form action="{% url 'logout' %}" method="POST" class="btn-primary">
-              {% csrf_token %}
-              <button type="submit" class="btn-text">Logout</button>
-            </form>
-          </li>
-        </ul>
-      </div>
-    </nav>
+        <li>
+          <a href="{% url 'forum'%}"> Forum </a>
+        </li>
+        <li>
+          <form action="{% url 'logout' %}" method="POST" class="btn-primary">
+            {% csrf_token %}
+            <button type="submit" class="btn-text">Logout</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-    <section class="timeline-body">
+  <section class="timeline-body">
 
     {% for year, books in grouped_books.items %}
 
@@ -82,66 +67,76 @@
 
     {% for book in books %}
 
-        <div class="timeline-item">
-
-            <div class="timeline-marker">
-
-                <div class="timeline-dot"></div>
-
-                {% if not forloop.last %}
-                    <div class="timeline-line"></div>
-                {% endif %}
-
-            </div>
-
-            <div class="book-card">
-                <img src="{{ book.cover.url }}" alt="{{ book.title }}" class="book-cover">
-
-                <p class="book-label">
-                    {% if book.is_current %}
-                        Current pick
-                    {% else %}
-                        {{ book.month }}
-                    {% endif %}
-                </p> 
+    <div class="timeline-item">
 
 
-                <h2 class="book-title">
-                    {{ book.title }}
-                </h2>
 
-                <p class="book-author">
-                    {{ book.author }}
-                </p>
 
-                <p class="book-rating">
-                    ⭐ {{ book.average_rating | default:"No ratings"}}
-                </p>
 
-                <p class="book-rating">
 
-                    {{ book.reviews.count }}
 
-                </p>
 
-                <p class="book-rating">
+      <div class="book-card">
 
-                    {{ book.discussion_posts.count }} Posts
+{% if book.cover %}
+    <img
+        src="{{ book.cover.url }}"
+        alt="{{ book.title }}"
+        class="book-cover"
+        onerror="this.onerror=null; this.src='{% static 'bookclub/images/book-minimalistic.svg' %}';"
+    >
+{% else %}
+    <img
+        src="{% static 'bookclub/images/book-minimalistic.svg' %}"
+        alt="No book cover available"
+        class="book-cover"
+    >
+{% endif %}
 
-                </p>
-                <a
-                    href="{% url 'book_archive' book.id %}"
-                    class="btn-primary"
-                >
-                    View Archive
-                </a>
 
-            </div>
-        </div>
+        <p class="book-label">
+          {% if book.is_current %}
+          Current pick
+          {% else %}
+          {{ book.month }}
+          {% endif %}
+        </p>
+
+
+        <h2 class="book-title">
+          {{ book.title }}
+        </h2>
+
+        <p class="book-author">
+          {{ book.author }}
+        </p>
+
+        <p class="book-rating">
+          ⭐ {{ book.average_rating | default:"No ratings"}}
+        </p>
+
+        <p class="book-rating">
+
+          {{ book.reviews.count }}
+
+        </p>
+
+        <p class="book-rating">
+
+          {{ book.discussion_posts.count }} Posts
+
+        </p>
+        <a href="{% url 'book_archive' book.id %}" class="btn-primary">
+          View Archive
+        </a>
+
+      </div>
+    </div>
 
 
     {% endfor %} {% endfor %} {% endif %}
 
-    </section>
-  </body>
+  </section>
+</body>
+
 </html>

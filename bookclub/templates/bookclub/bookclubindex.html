@@ -258,6 +258,7 @@
         <img
             src="{{ review.user.profile.profile_picture.url }}"
             class="member-image"
+            onerror="this.onerror=null; this.src='{% static 'bookclub/images/defaultusericon.svg' %}';"
         >
 
         {% else %}
