@@ -59,3 +59,26 @@ function toggleReplies(postId) {
         "active"
     );
 }
+
+document.querySelectorAll(".review-card").forEach((card) => {
+  const review = card.querySelector(".review-content");
+  const button = card.querySelector(".review-toggle");
+
+  const hasOverflow = review.scrollHeight > review.clientHeight;
+    button.hidden = !hasOverflow;
+
+    if (!hasOverflow) {
+        return;
+    }
+
+  if (!review || !button || review.scrollHeight <= review.clientHeight) {
+    return;
+  }
+
+  button.hidden = false;
+  button.addEventListener("click", () => {
+    const expanded = review.classList.toggle("is-expanded");
+    button.setAttribute("aria-expanded", String(expanded));
+    button.textContent = expanded ? "Read less" : "Read more";
+  });
+});

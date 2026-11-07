@@ -1023,14 +1023,10 @@ img.member-image {
 
 .admin-grid {
 
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(350px, 1fr));
-
+    display: flex;
     gap: 2rem;
-
-    margin-bottom: 4rem;
+    margin: 1rem auto;
+    justify-content: center;
 }
 
 
@@ -1228,22 +1224,62 @@ img.member-image {
     translateY(-8px);
 }
 
-
-
 .review-user {
 
     display:flex;
-
+    flex-direction:column;
     align-items:center;
-
     gap:1rem;
-
     margin-bottom:1rem;
+    overflow:hidden;
 }
 
+.review-user img {
 
+    width: 200px;
 
+    height:200px;
 
+    border-radius:50%;
+
+    object-fit:cover;
+}
+
+.review-content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+.review-content.is-expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+.review-toggle {
+  margin-top: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-accent);
+  cursor: pointer;
+  font: inherit;
+  text-decoration: underline;
+}
+
+.admin-stats-grid{
+    display: flex;
+   
+    flex-direction: row;
+    margin: 5rem auto 0 auto;
+    justify-self: flex-end;
+}
+.admin-stat-card {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 10px;
+}
 /* Modal */
 
 .modal-overlay {

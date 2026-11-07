@@ -11,42 +11,6 @@
   <script src="{% static 'bookclub/js/scripts.js' %}" defer></script>
 </head>
 
-<div class="admin-stats-grid">
-
-    <div class="admin-stat-card">
-
-        <h2>{{ member_count }}</h2>
-
-        <p>Members</p>
-
-    </div>
-
-    <div class="admin-stat-card">
-
-        <h2>{{ book_count }}</h2>
-
-        <p>Books Read</p>
-
-    </div>
-
-    <div class="admin-stat-card">
-
-        <h2>{{ review_count }}</h2>
-
-        <p>Reviews</p>
-
-    </div>
-
-    <div class="admin-stat-card">
-
-        <h2>{{ discussion_count }}</h2>
-
-        <p>Posts</p>
-
-    </div>
-
-</div>
-
 <body>
   {% if request.user.is_authenticated %}
 
@@ -87,6 +51,43 @@
       </ul>
     </div>
   </nav>
+
+  
+<div class="admin-stats-grid">
+
+    <div class="admin-stat-card">
+
+        <h2>{{ member_count }}</h2>
+
+        <p>Members</p>
+
+    </div>
+
+    <div class="admin-stat-card">
+
+        <h2>{{ book_count }}</h2>
+
+        <p>Books Read</p>
+
+    </div>
+
+    <div class="admin-stat-card">
+
+        <h2>{{ review_count }}</h2>
+
+        <p>Reviews</p>
+
+    </div>
+
+    <div class="admin-stat-card">
+
+        <h2>{{ discussion_count }}</h2>
+
+        <p>Posts</p>
+
+    </div>
+
+</div>
 
   <section class="admin-dashboard-body">
 

@@ -292,11 +292,20 @@
 
 
 
-    <p>
+    <p class ="review-content" id="review-{{ forloop.counter }}">
 
         {{ review.content }}
 
     </p>
+    <button
+    type="button"
+    class="review-toggle"
+    aria-expanded="false"
+    aria-controls="review-{{ forloop.counter }}"
+    hidden
+    >
+    Read more..
+    </button>
 
 
 
